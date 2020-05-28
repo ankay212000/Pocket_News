@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "345292679217",
+    "firebase_url": "https://login-demo-5d8dc.firebaseio.com",
+    "project_id": "login-demo-5d8dc",
+    "storage_bucket": "login-demo-5d8dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345292679217:android:0959371295dcb3d9bf8d10",
+        "android_client_info": {
+          "package_name": "com.example.updateme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345292679217-tocgafsh604gaifce2aktrcrq3100tkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHbJ2wDVKnQyDl4J62p1PB7aIYa9eqxNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345292679217-tocgafsh604gaifce2aktrcrq3100tkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
