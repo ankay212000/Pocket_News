@@ -13,6 +13,6 @@ A crossplatform app designed to get news after evry 1 hour
 # RegistrationPage
 ![](Screenshot_2020-05-31-20-50-50-288_com.example.news.jpg)
 # HomePage
-![](Screenshot_2020-05-31-20-50-50-288_com.example.news.jpg)
+![](Screenshot_2020-05-31-20-50-37-015_com.example.news.jpg)
 # Drawer
 ![](Screenshot_2020-05-31-20-51-09-269_com.example.news.jpg)
