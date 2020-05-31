@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'login.dart';
 
 class Draw extends StatefulWidget {
+  Draw({Key key, this.title, this.uid, this.email}) : super(key: key);
+  final String title;
+  final String uid;
+  final String email;
   @override
   _DrawState createState() => _DrawState();
 }
@@ -13,48 +18,30 @@ class _DrawState extends State<Draw> {
       child: Column(
         children: <Widget>[
           UserAccountsDrawerHeader (
-            accountEmail: Text("ankay212000@gmail.com"),
-            accountName: Text("ANKAY_21"),
+            accountEmail: Text(widget.email),
+            accountName: Text(widget.title),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.orangeAccent,
-              child: Text("N"),
+              child: Text(widget.title.toString()[0],style: TextStyle(fontSize: 40.0),),
               //Image.asset('assets/images/n.jpg'),
             ),
           ),
           InkWell(
             child: ListTile(
-              title: Text("Account"),
-              leading: Icon(Icons.account_circle),
+              leading: Icon(Icons.exit_to_app),
+              title: Text("Log Out"),
             ),
-            onTap: (){},
-          ),
-          InkWell(
-            child: ListTile(
-              title: Text("Settings"),
-              leading: Icon(Icons.settings),
-            ),
-            onTap: (){},
-          ),
-          InkWell(
-            child: ListTile(
-              leading: Icon(Icons.help),
-              title: Text("Help Center"),
-            ),
-            onTap: (){},
-          ),
-          InkWell(
-            child: ListTile(
-              leading: Icon(Icons.contacts),
-              title: Text("Contact Us"),
-            ),
-            onTap: (){},
-          ),
-          InkWell(
-            child: ListTile(
-              leading: Icon(Icons.info),
-              title: Text("About"),
-            ),
-            onTap: (){},
+            onTap: (){
+              FirebaseAuth.instance
+                  .signOut()
+                  .then((result) =>
+                      Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()
+                         )))
+                  .catchError((err) => print(err));
+            },
           ),
         ],
       ),

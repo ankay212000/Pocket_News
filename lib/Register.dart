@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:updateme/homepage.dart';
-import 'package:updateme/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'check.dart';
+import 'login.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -12,12 +13,16 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
+  TextEditingController firstNameInputController;
+  TextEditingController lastNameInputController;
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
 
   @override
   initState() {
+    firstNameInputController = new TextEditingController();
+    lastNameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
@@ -45,6 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height.roundToDouble();
     return Scaffold(
       backgroundColor: Colors.black,
         body: Stack(
@@ -52,10 +58,10 @@ class _RegisterPageState extends State<RegisterPage> {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 500.0),
+                padding: EdgeInsets.only(bottom: deviceHeight*0.7),
                 child: Container(
-                  height: 100,
-                  width: 100,
+                  height: deviceHeight*0.118,
+                  width: deviceHeight*0.118,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -69,21 +75,40 @@ class _RegisterPageState extends State<RegisterPage> {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(bottom:330.0),
+                padding: EdgeInsets.only(bottom:deviceHeight*0.50),
                 child: Text("Welcome", style: TextStyle(color: Colors.white,fontSize: 40.0),),
               ),),
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(right:8.0,left:8.0,top: 100.0),
+                padding: EdgeInsets.only(right:deviceHeight*0.02,left:deviceHeight*0.02,top: deviceHeight*0.2),
                 child: Container(
           color: Colors.white,
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(deviceHeight*0.023),
             child: SingleChildScrollView(
                   child: Form(
                 key: _registerFormKey,
                 child: Column(
                   children: <Widget>[
+                    TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'First Name*', hintText: "John"),
+                    controller: firstNameInputController,
+                    validator: (value) {
+                      if (value.length < 3) {
+                        return "Please enter a valid first name. Character>3";
+                      }
+                    },
+                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Last Name*', hintText: "Doe"),
+                      controller: lastNameInputController,
+                      validator: (value) {
+                        if (value.length < 3) {
+                          return "Please enter a valid last name. Character>3";
+                        }
+                      }),
                     TextFormField(
                       decoration: InputDecoration(
                           labelText: 'Email*', hintText: "john.doe@gmail.com"),
@@ -106,31 +131,60 @@ class _RegisterPageState extends State<RegisterPage> {
                       validator: pwdValidator,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top:16.0),
+                      padding: EdgeInsets.only(top:deviceHeight*0.0189),
                       child: RaisedButton(
                         child: Text("Register"),
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         onPressed: () {
                           if (_registerFormKey.currentState.validate()) {
-                            if (pwdInputController.text ==
-                                confirmPwdInputController.text) {
-                              FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: emailInputController.text,
-                                      password: pwdInputController.text)
+                             if (pwdInputController.text ==
+                            confirmPwdInputController.text) {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: emailInputController.text,
+                                  password: pwdInputController.text)
+                              .then((currentUser) => Firestore.instance
+                                  .collection("users")
+                                  .document(currentUser.uid)
+                                  .setData({
+                                    "uid": currentUser.uid,
+                                    "fname": firstNameInputController.text,
+                                    "surname": lastNameInputController.text,
+                                    "email": emailInputController.text,
+                                  })
                                   .then((result) => {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => HomePage()
-                                                    ),)
-                                          })     
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Check()),
+                                            (_) => false),
+                                        firstNameInputController.clear(),
+                                        lastNameInputController.clear(),
+                                        emailInputController.clear(),
+                                        pwdInputController.clear(),
+                                        confirmPwdInputController.clear()
+                                      })
                                   .catchError((err) => showDialog(context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text(err.toString()),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              })))
+                              .catchError((err) =>showDialog(context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Text("Error"),
-                                      content: Text("User with same email exist!!!"),
+                                      content: Text(err.toString()),
                                       actions: <Widget>[
                                         FlatButton(
                                           child: Text("Close"),

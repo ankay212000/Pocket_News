@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:updateme/post.dart';
-import 'file:///C:/Users/nktum/AndroidStudioProjects/updateme/lib/webview.dart';
+import 'post.dart';
+import 'webview.dart';
 
 class NewsCard extends StatefulWidget {
 
@@ -127,50 +127,6 @@ class _NewsCardState extends State<NewsCard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    IconButton(
-                      icon: this.isLiked
-                          ? Icon(Icons.favorite)
-                          : Icon(Icons.favorite_border),
-                      onPressed: (){
-                        final snackBar =SnackBar(
-                          content: Text("Added to favorite"),
-                          action: SnackBarAction(
-                            label : 'Undo',
-                            onPressed: (){
-                              setState(() {
-                                this.isLiked = !this.isLiked;
-                              });
-                            },
-                          ),
-                        );
-                        Scaffold.of(context).showSnackBar(snackBar);
-                        setState(() {
-                          this.isLiked = !this.isLiked;
-                        });
-                      },
-                    ),
-                    IconButton(
-                      icon: this.isBookmarked
-                          ? Icon(Icons.bookmark)
-                          : Icon(Icons.bookmark_border),
-                      onPressed: (){
-                        final snackBar =SnackBar(
-                          content: Text("Bookmark Added"),
-                          action: SnackBarAction(
-                            label : 'Undo',
-                            onPressed: (){
-                              setState(() {
-                                this.isBookmarked = !this.isBookmarked;
-                              });
-                            },
-                          ),
-                        );
-                        Scaffold.of(context).showSnackBar(snackBar);
-                        setState(() {
-                          this.isBookmarked = !this.isBookmarked;
-                        });
-                      },
-                    ),
                     IconButton(
                       icon: Icon(Icons.share),
                       onPressed: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/nktum/AndroidStudioProjects/updateme/lib/splashpage.dart';
+import 'splashpage.dart';
 
 void main() => runApp(MyApp());
 

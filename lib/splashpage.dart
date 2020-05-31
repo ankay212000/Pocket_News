@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:updateme/login.dart';
+import 'check.dart';
 import 'dart:async';
 
 class Splashpage extends StatefulWidget {
@@ -14,7 +14,7 @@ class _SplashpageState extends State<Splashpage> {
     super.initState();
     Timer(Duration(seconds: 3),()=>Navigator.pushReplacement(context,
      MaterialPageRoute(
-       builder: (context) =>LoginPage()
+       builder: (context) =>Check()
         )
       )
     );
@@ -57,7 +57,7 @@ class _SplashpageState extends State<Splashpage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top:8.0),
+                padding: EdgeInsets.only(top:deviceheight*0.009),
                 child: Text(
                   "Get News Anywhere,Anytime!!!",
                   style: TextStyle(
@@ -67,6 +67,12 @@ class _SplashpageState extends State<Splashpage> {
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(top: deviceheight*0.07),
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  strokeWidth: 5,),
+              )
             ],
           ),
         )

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:updateme/homepage.dart';
-import 'package:updateme/Register.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'homepage.dart';
+import 'Register.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -43,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height.roundToDouble();
     return Scaffold(
       backgroundColor: Colors.black,
         appBar: AppBar(
@@ -51,10 +53,10 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 500.0),
+                padding: EdgeInsets.only(bottom: deviceHeight*0.7),
                 child: Container(
-                  height: 100,
-                  width: 100,
+                  height: deviceHeight*0.118,
+                  width: deviceHeight*0.118,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -68,18 +70,18 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(bottom:330.0),
+                padding: EdgeInsets.only(bottom:deviceHeight*0.4),
                 child: Text("User Login", style: TextStyle(color: Colors.white,fontSize: 40.0),),
               ),),
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(right: 8.0,left: 8.0),
+                padding: EdgeInsets.only(right: deviceHeight*0.01,left: deviceHeight*0.01),
                 child: Padding(
-                  padding: const EdgeInsets.only(top:100.0),                // by mistake i have added padding inside padding 
+                  padding: EdgeInsets.only(top:deviceHeight*0.11),                // by mistake i have added padding inside padding 
                   child: Container(
                   color: Colors.white,
-                  padding: const EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(deviceHeight*0.023),
                   child: SingleChildScrollView(
                       child: Form(
                     key: _loginFormKey,
@@ -101,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           validator: pwdValidator,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top:16.0),
+                          padding: EdgeInsets.only(top:deviceHeight*0.018),
                           child: RaisedButton(
                             child: Text("Login"),
                             color: Theme.of(context).primaryColor,
@@ -110,28 +112,50 @@ class _LoginPageState extends State<LoginPage> {
                               if (_loginFormKey.currentState.validate()) {
                                 FirebaseAuth.instance
                                     .signInWithEmailAndPassword(
-                                        email: emailInputController.text,
-                                        password: pwdInputController.text)
-                                    .then((result) =>
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => HomePage()
-                                                    )))
+                                    email: emailInputController.text,
+                                    password: pwdInputController.text)
+                                    .then((currentUser) => Firestore.instance
+                                    .collection("users")
+                                    .document(currentUser.uid)
+                                    .get()
+                                    .then((DocumentSnapshot result) =>
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage(
+                                              title: result['fname'],
+                                              uid: currentUser.uid,
+                                              email: emailInputController.text,
+                                            ))))
                                     .catchError((err) => showDialog(context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text("Error"),
-                                      content: Text("Incorrect email or password"),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text("Close"),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        )
-                                      ],
-                                    );
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Error"),
+                                        content: Text(err.toString()),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            child: Text("Close"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          )
+                                        ],
+                                      );
+                                    })))
+                                    .catchError((err) => showDialog(context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Error"),
+                                        content: Text(err.toString()),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            child: Text("Close"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          )
+                                        ],
+                                      );
                                     }));
                               }
                             },

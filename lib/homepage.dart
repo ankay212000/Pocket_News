@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:updateme/post.dart';
-import 'package:updateme/drawer.dart';
-import 'package:updateme/newscard.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:updateme/login.dart';
+import 'post.dart';
+import 'drawer.dart';
+import 'newscard.dart';
 
 class HomePage extends StatefulWidget {
+  HomePage({Key key, this.title, this.uid, this.email}) : super(key: key);
+  final String title;
+  final String uid;
+  final String email;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -50,18 +52,9 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: <Widget>[
           FlatButton(
-            child: Text("Log Out"),
+            child: Text(widget.title),
             textColor: Colors.white,
             onPressed: () {
-              FirebaseAuth.instance
-                  .signOut()
-                  .then((result) =>
-                      Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()
-                                  )))
-                  .catchError((err) => print(err));
             },
           )
         ],
@@ -75,25 +68,7 @@ class _HomePageState extends State<HomePage> {
         ): Center(child: CircularProgressIndicator()),
         onRefresh: _fetchData,
       ),
-      drawer: Draw(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark,color: Colors.white,),
-              title: Text("Your Save",style: TextStyle(color: Colors.white),)
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity,color: Colors.white,),
-              title: Text("You",style: TextStyle(color: Colors.white),)
-          )
-        ],
-        elevation: 3,
-        backgroundColor: Colors.black,
-      ),
+      drawer: Draw(title: widget.title,uid: widget.uid,email: widget.email)
     );
   }
 }
