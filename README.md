@@ -1,5 +1,5 @@
 # Pocket News
-A crossplatform app designed to get news after every 1 hour
+A crossplatform app designed to get news after every 1 hour,
 It is linked to firebase services at backend.
 ## Requirements
 1. Flutter installed on your system
