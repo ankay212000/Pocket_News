@@ -7,7 +7,7 @@ A crossplatform app designed to get news after evry 1 hour
 3. Emulator or Physical Device for debugging
 ## Images
 # SplashPage
-<img src="Screenshot_2020-05-31-20-50-12-373_com.example.news.jpg" width=100 height=100>
+<img src="Screenshot_2020-05-31-20-50-12-373_com.example.news.jpg" width=300 height=500>
 # LoginPage
 <img src="Screenshot_2020-05-31-20-50-16-346_com.example.news.jpg" width=100 height=100>
 # RegistrationPage
