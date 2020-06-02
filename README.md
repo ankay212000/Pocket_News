@@ -6,9 +6,9 @@ It is linked to firebase services at backend.
 2. IDE (preferrably VS Code but sometimes exceptions are thrown that can be easily handled by Android Studios)
 3. Emulator or Physical Device for debugging
 ## How to run
-1.Download the project or clone it
-2.Add an emulator or any physical device in developer mode for debugging
-3.Run the main.dart file
+1. Download the project or clone it
+2. Add an emulator or any physical device in developer mode for debugging
+3. Run the main.dart file
 HURRAY!!
 ## Images
 # SplashPage
