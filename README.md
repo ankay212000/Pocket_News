@@ -9,7 +9,6 @@ It is linked to firebase services at backend.
 1. Download the project or clone it
 2. Add an emulator or any physical device in developer mode for debugging
 3. Run the main.dart file
-HURRAY!!
 ## Images
 # SplashPage
 <img src="Screenshot_2020-05-31-20-50-12-373_com.example.news.jpg" width=300 height=600>
