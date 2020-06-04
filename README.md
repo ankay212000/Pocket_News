@@ -14,6 +14,7 @@ It is linked to firebase services at backend.
 ## Features
 1. Get latest 1 hour news refreshed every time.
 2. Firebase authentication login and Registration
+3. Sharing of news via any sharing medium
 # Future Features
 1. More varied news can be added using more APIs(can be created using web scraping) or can be found one.
 2. Bookmark and like feature.
