@@ -21,13 +21,19 @@ It is linked to firebase services at backend.
 4. Recommended for you feature.
 
 ## Images
+
 # SplashPage
+
 <img src="Screenshot_2020-05-31-20-50-12-373_com.example.news.jpg" width=300 height=600>
 # LoginPage
+
 <img src="Screenshot_2020-05-31-20-50-16-346_com.example.news.jpg" width=300 height=600>
 # RegistrationPage
+
 <img src="Screenshot_2020-05-31-20-50-50-288_com.example.news.jpg" width=300 height=600>
 # HomePage
+
 <img src="Screenshot_2020-05-31-20-50-37-015_com.example.news.jpg" width=300 height=600>
 # Drawer
+
 <img src="Screenshot_2020-05-31-20-51-09-269_com.example.news.jpg" width=300 height=600>
