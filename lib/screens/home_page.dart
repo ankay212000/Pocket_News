@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../components/post.dart';
-import '../components/drawer.dart';
-import '../components/newscard.dart';
+import 'package:news/components/post.dart';
+import 'package:news/components/drawer.dart';
+import 'package:news/components/newscard.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title, this.uid, this.email}) : super(key: key);

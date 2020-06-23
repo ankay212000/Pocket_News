@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../screens/login_page.dart';
+import 'package:news/screens/login_page.dart';
 
 class Draw extends StatefulWidget {
   Draw({Key key, this.title, this.uid, this.email}) : super(key: key);

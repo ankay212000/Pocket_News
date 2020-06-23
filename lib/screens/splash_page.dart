@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/check.dart';
+import 'package:news/components/check.dart';
 import 'dart:async';
 
 class Splashpage extends StatefulWidget {

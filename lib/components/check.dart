@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'file:///D:/Code/AndroidStudioProjects/News_app_2.0/lib/screens/login_page.dart';
-import '../screens/home_page.dart';
+import 'package:news/screens/login_page.dart';
+import 'package:news/screens/home_page.dart';
 
 class Check extends StatefulWidget {
   @override
