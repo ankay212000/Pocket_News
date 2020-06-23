@@ -29,10 +29,10 @@ class _SplashpageState extends State<Splashpage> {
           alignment: Alignment.center,
           child: Column(
             children: <Widget>[
-              SizedBox(height: deviceheight*0.225,
+              SizedBox(height: deviceheight*0.15,
               ),
               Container(
-                height: 200,
+                height: deviceheight*0.3,
                 width: 200,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -43,7 +43,7 @@ class _SplashpageState extends State<Splashpage> {
                 ),
               ),
               SizedBox(
-                height: deviceheight*0.2,
+                height: deviceheight*0.15,
               ),
               Padding(
                 padding: const EdgeInsets.only(top:50.0),
