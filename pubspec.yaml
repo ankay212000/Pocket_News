@@ -1,4 +1,4 @@
-name: news
+name: pocketnews
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -33,7 +33,7 @@ dependencies:
 dev_dependencies: 
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: 
 
 flutter_icons:
   android: true
