@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             Container(
               height: deviceHeight * 0.3,
-              width: 200,
+              width: deviceHeight*0.3,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
