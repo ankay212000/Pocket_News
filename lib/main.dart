@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'splashpage.dart';
+import 'screens/splash_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Update Me",
       debugShowCheckedModeBanner: false,
-      home: Splashpage(),
+      home: SplashPage(),
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           color: Colors.black,
