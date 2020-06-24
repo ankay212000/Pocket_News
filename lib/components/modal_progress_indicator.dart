@@ -68,7 +68,7 @@ class ProgressIndicator extends StatelessWidget {
 //          width: deviceHeight * 0.15,
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
-            color: Color(0x80000000),
+            color: Colors.black,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
