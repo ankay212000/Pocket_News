@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/layout-watch-v20/abc_alert_dialog_button_bar_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/layout-watch-v20/abc_alert_dialog_title_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/layout-watch-v20/abc_alert_dialog_title_material.xml"
+    }
+]

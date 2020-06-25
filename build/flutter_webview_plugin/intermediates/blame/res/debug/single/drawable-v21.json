@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/3aaf6e5219b7f981ec263df919098c6f/core-1.1.0/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/abc_list_divider_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/drawable-v21/abc_list_divider_material.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/abc_dialog_material_background.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/drawable-v21/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/home/tanvi/Desktop/News_app_2.0/build/flutter_webview_plugin/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/home/tanvi/.gradle/caches/transforms-2/files-2.1/701c33591765b03ec8ed51d702bd262d/appcompat-1.1.0/res/drawable-v21/abc_edit_text_material.xml"
+    }
+]
