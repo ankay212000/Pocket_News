@@ -32,11 +32,11 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: deviceHeight * 0.225,
+              height: deviceHeight * 0.15,
             ),
             Container(
-              height: 200,
-              width: 200,
+              height: deviceHeight * 0.3,
+              width: deviceHeight*0.3,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -46,7 +46,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             SizedBox(
-              height: deviceHeight * 0.2,
+              height: deviceHeight * 0.15,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 50.0),
