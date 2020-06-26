@@ -58,216 +58,390 @@ class _RegisterPageState extends State<RegisterPage> {
       indicatorStatus: 'Registering...',
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: deviceHeight * 0.7),
-                child: Container(
-                  height: deviceHeight * 0.118,
-                  width: deviceHeight * 0.118,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage("assests/images/75Fg.gif"),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assests/images/backg.jpg"),
+                    fit: BoxFit.cover),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: deviceHeight * 0.15,
+                        width: deviceHeight * 0.15,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage("assests/images/75Fg.gif"),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: deviceHeight * 0.50),
-                child: Text(
-                  "Welcome",
-                  style: TextStyle(color: Colors.white, fontSize: 40.0),
-                ),
-              ),
-            ),
-            Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(right: deviceHeight * 0.02, left: deviceHeight * 0.02, top: deviceHeight * 0.2),
-                  child: Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.all(deviceHeight * 0.023),
-                    child: SingleChildScrollView(
-                        child: Form(
-                      key: _registerFormKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'First Name*', hintText: "John"),
-                            controller: firstNameInputController,
-                            validator: (value) {
-                              if (value.length < 3) {
-                                return "Please enter a valid first name. Character>3";
-                              }
-                            },
-                          ),
-                          TextFormField(
-                              decoration: InputDecoration(labelText: 'Last Name*', hintText: "Doe"),
-                              controller: lastNameInputController,
-                              validator: (value) {
-                                if (value.length < 3) {
-                                  return "Please enter a valid last name. Character>3";
-                                }
-                              }),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Email*', hintText: "john.doe@gmail.com"),
-                            controller: emailInputController,
-                            keyboardType: TextInputType.emailAddress,
-                            validator: emailValidator,
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Password*', hintText: "********"),
-                            controller: pwdInputController,
-                            obscureText: true,
-                            validator: pwdValidator,
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Confirm Password*', hintText: "********"),
-                            controller: confirmPwdInputController,
-                            obscureText: true,
-                            validator: pwdValidator,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: deviceHeight * 0.0189),
-                            child: RaisedButton(
-                              child: Text("Register"),
-                              color: Theme.of(context).primaryColor,
-                              textColor: Colors.white,
-                              onPressed: () {
-                                setState(() {
-                                  showSpinner = true;
-                                });
-
-                                if (_registerFormKey.currentState.validate()) {
-                                  if (pwdInputController.text == confirmPwdInputController.text) {
-                                    FirebaseAuth.instance
-                                        .createUserWithEmailAndPassword(
-                                            email: emailInputController.text, password: pwdInputController.text)
-                                        .then(
-                                          (currentUser) => Firestore.instance
-                                              .collection("users")
-                                              .document(currentUser.uid)
-                                              .setData({
-                                                "uid": currentUser.uid,
-                                                "fname": firstNameInputController.text,
-                                                "surname": lastNameInputController.text,
-                                                "email": emailInputController.text,
-                                              })
-                                              .then((result) => {
-                                                    {
-                                                      setState(() {
-                                                        showSpinner = false;
-                                                      })
-                                                    },
-                                                    {
-                                                      Navigator.pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(builder: (context) => Check()),
-                                                          (_) => false),
-                                                      firstNameInputController.clear(),
-                                                      lastNameInputController.clear(),
-                                                      emailInputController.clear(),
-                                                      pwdInputController.clear(),
-                                                      confirmPwdInputController.clear(),
-                                                    }
-                                                  })
-                                              .catchError((err) {
-                                                setState(() {
-                                                  showSpinner = false;
-                                                });
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text("Error"),
-                                                      content: Text(err.toString()),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text("Close"),
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                        )
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              }),
-                                        )
-                                        .catchError(
-                                      (err) {
-                                        setState(() {
-                                          showSpinner = false;
-                                        });
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text("Error"),
-                                              content: Text(err.toString()),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  child: Text("Close"),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                )
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                    );
-                                  } else {
-                                    setState(() {
-                                      showSpinner = false;
-                                    });
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text("Error"),
-                                          content: Text("The passwords do not match"),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              child: Text("Close"),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            )
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }
-                                }
-                              },
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: deviceHeight * 0.005),
+                      child: Text(
+                        "SIGNUP",
+                        style: TextStyle(
+                            color: Colors.lightBlueAccent,
+                            fontSize: 35.0,
+                            fontFamily: 'Shadows',
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: deviceHeight*0.05,
+                  ),
+                  Form(
+                    key: _registerFormKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          controller: firstNameInputController,
+                          validator: (value) {
+                            if (value.length < 3) {
+                              return "Please enter a valid first name. Character>3";
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            labelText: 'First Name*',
+                            hintText: "John",
+                            labelStyle: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w100,),
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
                             ),
                           ),
-                          Text("Already have an account?"),
-                          FlatButton(
-                            child: Text("Login here!"),
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => LoginPage()),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    )),
+                        ),
+                        SizedBox(
+                          height: deviceHeight*0.02,
+                        ),
+                        TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              labelText: 'Last Name*',
+                              hintText: "Doe",
+                              labelStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w100,),
+                              hintStyle: TextStyle(
+                                  color: Colors.white, fontWeight: FontWeight.w100),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 20.0),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(32.0)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 1.0),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(32.0)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2.0),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(32.0)),
+                              ),
+                            ),
+                            controller: lastNameInputController,
+                            validator: (value) {
+                              if (value.length < 3) {
+                                return "Please enter a valid last name. Character>3";
+                              }
+                            }),
+                        SizedBox(
+                          height: deviceHeight*0.02,
+                        ),
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            labelText: 'Email ID*',
+                            labelStyle: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w100,),
+                            hintText: "john.doe@gmail.com",
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                          ),
+                          controller: emailInputController,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: emailValidator,
+                        ),
+                        SizedBox(
+                          height: deviceHeight*0.02,
+                        ),
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            labelText: 'Password*',
+                            labelStyle: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w100,),
+                            hintText: "********",
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                          ),
+                          controller: pwdInputController,
+                          obscureText: true,
+                          validator: pwdValidator,
+                        ),
+                        SizedBox(
+                          height: deviceHeight*0.02,
+                        ),
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Your Password*',
+                            labelStyle: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w100,),
+                            hintText: "********",
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                            ),
+                          ),
+                          controller: confirmPwdInputController,
+                          obscureText: true,
+                          validator: pwdValidator,
+                        ),
+                      ],
+                    ),
                   ),
-                ))
-          ],
+
+                  Padding(
+                    padding: EdgeInsets.only(top: deviceHeight * 0.0189),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Text("Register"),
+                      color: Theme.of(context).primaryColor,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          showSpinner = true;
+                        });
+
+                        if (_registerFormKey.currentState.validate()) {
+                          if (pwdInputController.text ==
+                              confirmPwdInputController.text) {
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                email: emailInputController.text,
+                                password: pwdInputController.text)
+                                .then(
+                                  (currentUser) => Firestore.instance
+                                  .collection("users")
+                                  .document(currentUser.uid)
+                                  .setData({
+                                "uid": currentUser.uid,
+                                "fname":
+                                firstNameInputController.text,
+                                "surname":
+                                lastNameInputController.text,
+                                "email": emailInputController.text,
+                              })
+                                  .then((result) => {
+                                {
+                                  setState(() {
+                                    showSpinner = false;
+                                  })
+                                },
+                                {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Check()),
+                                          (_) => false),
+                                  firstNameInputController
+                                      .clear(),
+                                  lastNameInputController.clear(),
+                                  emailInputController.clear(),
+                                  pwdInputController.clear(),
+                                  confirmPwdInputController
+                                      .clear(),
+                                }
+                              })
+                                  .catchError((err) {
+                                setState(() {
+                                  showSpinner = false;
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(err.toString()),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Close"),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              }),
+                            )
+                                .catchError(
+                                  (err) {
+                                setState(() {
+                                  showSpinner = false;
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(err.toString()),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Close"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          } else {
+                            setState(() {
+                              showSpinner = false;
+                            });
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text("The passwords do not match"),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Already have an account?",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: deviceHeight*0.05,
+                      ),
+                      FlatButton(
+                        child: Text(
+                          "Login here!",
+                          style: TextStyle(
+                              color: Colors.lightBlueAccent,
+                              fontSize: 20,
+                              fontFamily: 'Shadows',
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
