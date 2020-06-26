@@ -1,5 +1,4 @@
-# Programming Club Summer of Code (PSoC) Project Pocket News
-<img src="WhatsApp Image 2020-06-26 at 8.00.13 PMg" width=300 height=600>
+# Pocket News
 A crossplatform app designed to get news after every 1 hour,
 It is linked to firebase services at backend.
 ## Requirements
