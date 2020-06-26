@@ -1,5 +1,5 @@
-# Pocket News
-<img src="WhatsApp%20Image%202020-06-26%20at%208.00.13%20PM.jpeg" width=300 height=300>
+# Pocket News (PClub Summer of Code Project)
+<img src="WhatsApp%20Image%202020-06-26%20at%208.00.13%20PM.jpeg" width=350 height=350>
 
 A crossplatform app designed to get news after every 1 hour,
 It is linked to firebase services at backend.
