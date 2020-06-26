@@ -28,7 +28,9 @@ dependencies:
   share: ^0.6.2+3
   firebase_auth: ^0.11.0
   cloud_firestore:
-  flutter_spinkit:  
+  flutter_spinkit:
+  marquee: ^1.5.2
+  auto_size_text: ^2.1.0
 
 dev_dependencies: 
   flutter_test:

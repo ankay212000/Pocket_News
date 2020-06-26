@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'post.dart';
 import 'webview.dart';
+import 'package:marquee/marquee.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class NewsCard extends StatefulWidget {
   final Post post;
@@ -77,7 +80,7 @@ class _NewsCardState extends State<NewsCard> {
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         widget.post.name,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: deviceHeight * 0.011),
+                        style: TextStyle(fontWeight: FontWeight.bold), //, fontSize: deviceHeight * 0.011
                       ),
                     ),
                     Spacer(),
@@ -87,7 +90,21 @@ class _NewsCardState extends State<NewsCard> {
                             child: Chip(
                               backgroundColor: Colors.white,
                               avatar: Icon(Icons.edit),
-                              label: Text(widget.post.author),
+                              label: Container(
+                                height: 16.0,
+                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.42),
+                                child: AutoSizeText(
+                                  widget.post.author,
+                                  maxLines: 1,
+                                  overflowReplacement: Marquee(
+                                    text: widget.post.author,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    scrollAxis: Axis.horizontal,
+                                    blankSpace: 20.0,
+                                    velocity: 50.0,
+                                  ),
+                                ),
+                              ),
                             ),
                           )
                         : SizedBox()
