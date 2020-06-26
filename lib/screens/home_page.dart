@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:pocketnews/components/post.dart';
 import 'package:pocketnews/components/drawer.dart';
 import 'package:pocketnews/components/newscard.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title, this.uid, this.email}) : super(key: key);
@@ -15,9 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=ff94394ddcf74eb2be08755e5cd942e9";
+  String url =
+      "https://newsapi.org/v2/top-headlines?country=in&apiKey=ff94394ddcf74eb2be08755e5cd942e9";
   List<Post> posts = List();
   bool isLoaded = false;
+
+  GlobalKey _bottomNavigationKey = GlobalKey();
+  int _page = 0;
 
   Future<void> _fetchData() async {
     try {
@@ -73,6 +78,48 @@ class _HomePageState extends State<HomePage> {
         uid: widget.uid,
         email: widget.email,
       ),
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Colors.black,
+        backgroundColor: Colors.white,
+        buttonBackgroundColor: Colors.black,
+        key: _bottomNavigationKey,
+        index: 2,
+        items: <Widget>[
+          Icon(
+            Icons.search,
+            size: 20,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.favorite,
+            size: 20,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.home,
+            size: 20,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.bookmark,
+            size: 20,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.person,
+            size: 20,
+            color: Colors.white,
+          ),
+        ],
+        animationDuration: Duration(milliseconds: 300),
+        animationCurve: Curves.bounceIn,
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
+      ),
+      // ),
     );
   }
 }
