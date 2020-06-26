@@ -87,27 +87,27 @@ class _HomePageState extends State<HomePage> {
         items: <Widget>[
           Icon(
             Icons.search,
-            size: 30,
+            size: 20,
             color: Colors.white,
           ),
           Icon(
             Icons.favorite,
-            size: 30,
+            size: 20,
             color: Colors.white,
           ),
           Icon(
             Icons.home,
-            size: 30,
+            size: 20,
             color: Colors.white,
           ),
           Icon(
             Icons.bookmark,
-            size: 30,
+            size: 20,
             color: Colors.white,
           ),
           Icon(
             Icons.person,
-            size: 30,
+            size: 20,
             color: Colors.white,
           ),
         ],
