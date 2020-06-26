@@ -13,7 +13,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-      () => Navigator.pushReplacement(
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Check(),
@@ -29,6 +29,10 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: Colors.black,
       body: Container(
         alignment: Alignment.center,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
+        ),
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -36,7 +40,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             Container(
               height: deviceHeight * 0.3,
-              width: deviceHeight*0.3,
+              width: deviceHeight * 0.3,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -46,20 +50,26 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             SizedBox(
-              height: deviceHeight * 0.15,
+              height: deviceHeight * 0.02,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 50.0),
               child: Text(
                 "Pocket News",
-                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 45.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.lightBlueAccent,
+                    fontFamily: 'Shadows'),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(top: deviceHeight * 0.009),
               child: Text(
                 "Get News Anywhere,Anytime!!!",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.blueGrey),
               ),
             ),
             Padding(
