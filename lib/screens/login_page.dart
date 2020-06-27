@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'home_page.dart';
 import 'package:pocketnews/services/Register.dart';
-import 'package:pocketnews/components/modal_progress_indicator.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -16,8 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
-
-  bool showSpinner = false;
 
   @override
   initState() {
@@ -48,10 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height.roundToDouble();
-    return ModalProgressHUD(
-      inAsyncCall: showSpinner,
-      indicatorStatus: 'Logging In...',
-      child:Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -171,106 +168,107 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text("Login"),
                       color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
-                                onPressed: () {
-                                  if (_loginFormKey.currentState.validate()) {
-                                    setState(() {
-                                      showSpinner = true;
-                                    });
-                                    FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: emailInputController.text, password: pwdInputController.text)
-                                        .then(
-                                          (currentUser) => Firestore.instance
-                                              .collection("users")
-                                              .document(currentUser.uid)
-                                              .get()
-                                              .then((DocumentSnapshot result) {
-                                            setState(() {
-                                              showSpinner = false;
-                                            });
-                                            Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => HomePage(
-                                                  title: result['fname'],
-                                                  uid: currentUser.uid,
-                                                  email: emailInputController.text,
-                                                ),
-                                              ),
-                                            );
-                                          }).catchError(
-                                            (err) {
-                                              setState(() {
-                                                showSpinner = false;
-                                              });
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: Text("Error"),
-                                                    content: Text(err.toString()),
-                                                    actions: <Widget>[
-                                                      FlatButton(
-                                                        child: Text("Close"),
-                                                        onPressed: () {
-                                                          Navigator.of(context).pop();
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        )
-                                        .catchError(
-                                      (err) {
-                                        setState(() {
-                                          showSpinner = false;
-                                        });
-
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text("Error"),
-                                              content: Text(
-                                                err.toString(),
-                                              ),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  child: Text("Close"),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                )
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                    );
-                                  }
+                      onPressed: () {
+                        if (_loginFormKey.currentState.validate()) {
+                          FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                              email: emailInputController.text,
+                              password: pwdInputController.text)
+                              .then(
+                                (currentUser) => Firestore.instance
+                                .collection("users")
+                                .document(currentUser.uid)
+                                .get()
+                                .then(
+                                  (DocumentSnapshot result) =>
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(
+                                        title: result['fname'],
+                                        uid: currentUser.uid,
+                                        email: emailInputController.text,
+                                      ),
+                                    ),
+                                  ),
+                            )
+                                .catchError(
+                                  (err) => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Error"),
+                                    content: Text(err.toString()),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Close"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
                                 },
                               ),
                             ),
-                            Text("Don't have an account yet?"),
-                            FlatButton(
-                              child: Text("Register here!"),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                          )
+                              .catchError(
+                                (err) => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text(err.toString()),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
                                 );
                               },
-                            )
-                          ],
-                        ),
-                      ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
-                ),
-              )
-        );
+                  SizedBox(
+                    height: deviceHeight*0.05,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Don't have an account yet?",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        FlatButton(
+                          child: Text(
+                            "Register here!",
+                            style: TextStyle(color: Colors.lightBlueAccent,fontSize: 20,fontFamily: 'Shadows',fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
