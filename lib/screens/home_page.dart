@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.black,
+        height: deviceHeight * 0.07,
         backgroundColor: Colors.white,
         buttonBackgroundColor: Colors.black,
         key: _bottomNavigationKey,
