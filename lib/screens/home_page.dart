@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black26,
       appBar: AppBar(
@@ -80,6 +81,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.black,
+        height: deviceHeight * 0.07,
         backgroundColor: Colors.white,
         buttonBackgroundColor: Colors.black,
         key: _bottomNavigationKey,
@@ -100,10 +102,15 @@ class _HomePageState extends State<HomePage> {
             size: 20,
             color: Colors.white,
           ),
-          Icon(
-            Icons.bookmark,
-            size: 20,
-            color: Colors.white,
+          IconButton(
+            icon: Icon(
+              Icons.bookmark,
+              size: 20,
+              color: Colors.white,
+            ),
+            onPressed: () {
+//               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BookmarkPage()));
+            },
           ),
           Icon(
             Icons.person,
