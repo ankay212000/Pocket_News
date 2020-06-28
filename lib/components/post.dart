@@ -1,5 +1,5 @@
 class Post {
-  final String id,name,author,title,description,url,image,publishedAt;
+  final String id, name, author, title, description, url, image, publishedAt, documentID;
 
   Post({
     this.id,
@@ -9,9 +9,9 @@ class Post {
     this.description,
     this.image,
     this.url,
-    this.publishedAt
+    this.publishedAt,
+    this.documentID,
   });
-
 
   factory Post.fromJSON(Map<String, dynamic> json) {
     return Post(
@@ -22,7 +22,6 @@ class Post {
         description: json["description"],
         image: json["urlToImage"],
         url: json["url"],
-        publishedAt: json["publishedAt"].toString().replaceAll("T", " ").replaceAll("Z"," ")
-    );
+        publishedAt: json["publishedAt"].toString().replaceAll("T", " ").replaceAll("Z", " "));
   }
 }

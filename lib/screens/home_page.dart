@@ -5,6 +5,8 @@ import 'package:pocketnews/components/post.dart';
 import 'package:pocketnews/components/drawer.dart';
 import 'package:pocketnews/components/newscard.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:pocketnews/services/current_user.dart' as user;
+import 'package:pocketnews/screens/bookmark_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title, this.uid, this.email}) : super(key: key);
@@ -16,10 +18,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String url =
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=ff94394ddcf74eb2be08755e5cd942e9";
+  String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=ff94394ddcf74eb2be08755e5cd942e9";
   List<Post> posts = List();
   bool isLoaded = false;
+  bool isBookmarked = false;
 
   GlobalKey _bottomNavigationKey = GlobalKey();
   int _page = 0;
@@ -43,12 +45,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    user.loggedInUser;
     _fetchData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black26,
       appBar: AppBar(
@@ -67,7 +71,11 @@ class _HomePageState extends State<HomePage> {
             ? ListView.builder(
                 itemCount: posts.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return NewsCard(posts[index]);
+                  return NewsCard(
+                    post: posts[index],
+                    isBookmark: false,
+                    isHomePage: true,
+                  );
                 },
               )
             : Center(child: CircularProgressIndicator()),
@@ -84,6 +92,7 @@ class _HomePageState extends State<HomePage> {
         buttonBackgroundColor: Colors.black,
         key: _bottomNavigationKey,
         index: 2,
+        height: deviceHeight * 0.07,
         items: <Widget>[
           Icon(
             Icons.search,
@@ -100,10 +109,15 @@ class _HomePageState extends State<HomePage> {
             size: 20,
             color: Colors.white,
           ),
-          Icon(
-            Icons.bookmark,
-            size: 20,
-            color: Colors.white,
+          IconButton(
+            icon: Icon(
+              Icons.bookmark,
+              size: 20,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BookmarkPage()));
+            },
           ),
           Icon(
             Icons.person,
