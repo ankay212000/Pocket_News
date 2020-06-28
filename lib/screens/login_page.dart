@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'home_page.dart';
 import 'package:pocketnews/services/Register.dart';
+import 'package:pocketnews/components/modal_progress_indicator.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
+
+   bool showSpinner = false;
 
   @override
   initState() {
@@ -48,7 +51,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height.roundToDouble();
-    return Scaffold(
+    return ModalProgressHUD(
+      inAsyncCall: showSpinner,
+      indicatorStatus: 'Logging In...',
+      child: Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -170,6 +176,9 @@ class _LoginPageState extends State<LoginPage> {
                       textColor: Colors.white,
                       onPressed: () {
                         if (_loginFormKey.currentState.validate()) {
+                          setState(() {
+                           showSpinner=true; 
+                          });
                           FirebaseAuth.instance
                               .signInWithEmailAndPassword(
                               email: emailInputController.text,
@@ -180,7 +189,10 @@ class _LoginPageState extends State<LoginPage> {
                                 .document(currentUser.uid)
                                 .get()
                                 .then(
-                                  (DocumentSnapshot result) =>
+                                  (DocumentSnapshot result){
+                                    setState(() {
+                                     showSpinner=false; 
+                                    });
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -190,10 +202,14 @@ class _LoginPageState extends State<LoginPage> {
                                         email: emailInputController.text,
                                       ),
                                     ),
-                                  ),
-                            )
+                                  );
+                                  })
                                 .catchError(
-                                  (err) => showDialog(
+                                  (err) {
+                                    setState(() {
+                                     showSpinner=false; 
+                                    });
+                                     showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -209,11 +225,16 @@ class _LoginPageState extends State<LoginPage> {
                                     ],
                                   );
                                 },
-                              ),
+                              );
+                              },
                             ),
                           )
                               .catchError(
-                                (err) => showDialog(
+                                (err){
+                                  setState(() {
+                                   showSpinner=false; 
+                                  });
+                                 showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
@@ -229,7 +250,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ],
                                 );
                               },
-                            ),
+                            );
+                          },
                           );
                         }
                       },
@@ -269,6 +291,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+     ),
     );
   }
 }
