@@ -92,7 +92,6 @@ class _HomePageState extends State<HomePage> {
         buttonBackgroundColor: Colors.black,
         key: _bottomNavigationKey,
         index: 2,
-        height: deviceHeight * 0.07,
         items: <Widget>[
           Icon(
             Icons.search,
