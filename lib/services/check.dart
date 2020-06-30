@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketnews/screens/login_page.dart';
-import 'package:pocketnews/screens/home_page.dart';
+import 'package:pocketnews/services/navigate.dart';
 
 class Check extends StatefulWidget {
   @override
@@ -25,9 +25,7 @@ class _CheckState extends State<Check> {
                     (DocumentSnapshot result) => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(
-                          title: result["fname"],
-                          email: currentUser.email,
+                        builder: (context) => Navigate(
                         ),
                       ),
                     ),

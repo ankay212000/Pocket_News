@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       home: SplashPage(),
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          color: Colors.black54,
+          color: Colors.black,
         ),
       ),
     );

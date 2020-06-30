@@ -15,7 +15,6 @@ class BookmarkPage extends StatefulWidget {
 class _BookmarkPageState extends State<BookmarkPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currentUser = user.loggedInUser;
   }
@@ -25,6 +24,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bookmarks'),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: NewsCardStream(),
@@ -59,7 +59,6 @@ class NewsCardStream extends StatelessWidget {
             publishedAt: bookmark.data['publishedAt'],
             documentID: bookmark.data['documentID'],
           );
-
           newsCards.add(NewsCard(
             post: post,
             isBookmark: true,
