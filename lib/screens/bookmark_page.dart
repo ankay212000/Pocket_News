@@ -8,6 +8,8 @@ final _firestore = Firestore.instance;
 String currentUser;
 
 class BookmarkPage extends StatefulWidget {
+  BookmarkPage({Key key, this.controller}) : super(key: key);
+  final ScrollController controller;
   @override
   _BookmarkPageState createState() => _BookmarkPageState();
 }
@@ -27,7 +29,9 @@ class _BookmarkPageState extends State<BookmarkPage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: NewsCardStream(),
+        child: NewsCardStream(
+          controller: widget.controller,
+        ),
       ),
       backgroundColor: Colors.black54,
     );
@@ -35,10 +39,17 @@ class _BookmarkPageState extends State<BookmarkPage> {
 }
 
 class NewsCardStream extends StatelessWidget {
+  NewsCardStream({Key key, this.controller}) : super(key: key);
+
+  final ScrollController controller;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection("users").document(currentUser).collection("saves").snapshots(),
+      stream: _firestore
+          .collection("users")
+          .document(currentUser)
+          .collection("saves")
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -65,9 +76,16 @@ class NewsCardStream extends StatelessWidget {
             isHomePage: false,
           ));
         }
-
-        return ListView(
-          children: newsCards,
+        return CustomScrollView(
+          controller: controller,
+          shrinkWrap: true,
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                newsCards,
+              ),
+            ),
+          ],
         );
       },
     );
