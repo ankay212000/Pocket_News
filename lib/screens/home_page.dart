@@ -8,8 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pocketnews/screens/login_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.url}) : super(key: key);
+  HomePage({Key key, this.url, this.controller}) : super(key: key);
   final String url;
+  final ScrollController controller;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
       print(e);
     }
   }
+
   @override
   void initState() {
     user.loggedInUser;
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           FlatButton(
             child: Text("Log Out"),
             textColor: Colors.white,
-            onPressed: (){
+            onPressed: () {
               FirebaseAuth.instance
                   .signOut()
                   .then(
@@ -75,15 +77,26 @@ class _HomePageState extends State<HomePage> {
       ),
       body: RefreshIndicator(
         child: this.isLoaded
-            ? ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return NewsCard(
-                    post: posts[index],
-                    isBookmark: false,
-                    isHomePage: true,
-                  );
-                },
+            ? CustomScrollView(
+                controller: widget.controller,
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverPadding(
+                    padding: EdgeInsets.all(2.0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return NewsCard(
+                            post: posts[index],
+                            isBookmark: false,
+                            isHomePage: true,
+                          );
+                        },
+                        childCount: posts.length,
+                      ),
+                    ),
+                  ),
+                ],
               )
             : Center(child: CircularProgressIndicator()),
         onRefresh: _fetchData,
