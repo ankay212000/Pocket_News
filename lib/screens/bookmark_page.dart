@@ -8,6 +8,8 @@ final _firestore = Firestore.instance;
 String currentUser;
 
 class BookmarkPage extends StatefulWidget {
+  BookmarkPage({Key key, this.controller}) : super(key: key);
+  final ScrollController controller;
   @override
   _BookmarkPageState createState() => _BookmarkPageState();
 }
@@ -15,7 +17,6 @@ class BookmarkPage extends StatefulWidget {
 class _BookmarkPageState extends State<BookmarkPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currentUser = user.loggedInUser;
   }
@@ -25,9 +26,12 @@ class _BookmarkPageState extends State<BookmarkPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bookmarks'),
+        centerTitle: true,
       ),
       body: SafeArea(
-        child: NewsCardStream(),
+        child: NewsCardStream(
+          controller: widget.controller,
+        ),
       ),
       backgroundColor: Colors.black54,
     );
@@ -35,10 +39,17 @@ class _BookmarkPageState extends State<BookmarkPage> {
 }
 
 class NewsCardStream extends StatelessWidget {
+  NewsCardStream({Key key, this.controller}) : super(key: key);
+
+  final ScrollController controller;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection("users").document(currentUser).collection("saves").snapshots(),
+      stream: _firestore
+          .collection("users")
+          .document(currentUser)
+          .collection("saves")
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -59,16 +70,22 @@ class NewsCardStream extends StatelessWidget {
             publishedAt: bookmark.data['publishedAt'],
             documentID: bookmark.data['documentID'],
           );
-
           newsCards.add(NewsCard(
             post: post,
             isBookmark: true,
             isHomePage: false,
           ));
         }
-
-        return ListView(
-          children: newsCards,
+        return CustomScrollView(
+          controller: controller,
+          shrinkWrap: true,
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                newsCards,
+              ),
+            ),
+          ],
         );
       },
     );

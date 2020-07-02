@@ -23,8 +23,10 @@ class _NewsCardState extends State<NewsCard> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    print(widget.post);
+    print(widget.isBookmark);
+    print(widget.isHomePage);
     isBookmarked = widget.isBookmark;
   }
 
