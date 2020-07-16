@@ -14,25 +14,33 @@ class _CheckState extends State<Check> {
   initState() {
     FirebaseAuth.instance.currentUser().then((currentUser) => {
           if (currentUser == null)
-            {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))}
+            {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => LoginPage()))
+            }
           else
             {
               Firestore.instance
                   .collection("users")
                   .document(currentUser.uid)
                   .get()
-                  .then(
-                    (DocumentSnapshot result) => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Navigate(
-                        ),
-                      ),
+                  .then((DocumentSnapshot result) {
+              
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Navigate(
+                      uid: currentUser.uid,
+                      email: result.data['email'],
+                      fname: result.data['fname'],
+                      surname: result.data['surname'],
                     ),
-                  )
-                  .catchError((err) => print(err))
+                  ),
+                );
+              }).catchError((err) => print(err))
             }
         });
+
     super.initState();
   }
 
