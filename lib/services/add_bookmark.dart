@@ -10,7 +10,7 @@ String get newsDocumentID {
 
 //class Bookmark {
 void addData(Post post) {
-  String currentUser = user.loggedInUser;
+  String currentUser = user.loggedInUserID;
   if (currentUser == null) {
     print("Login again");
     return null;
@@ -40,7 +40,7 @@ void addData(Post post) {
 }
 
 void removeData(String documentID) {
-  String currentUser = user.loggedInUser;
+  String currentUser = user.loggedInUserID;
   if (currentUser == null) {
     print("Login again");
     return;

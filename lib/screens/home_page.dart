@@ -4,12 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:pocketnews/components/post.dart';
 import 'package:pocketnews/components/newscard.dart';
 import 'package:pocketnews/services/current_user.dart' as user;
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pocketnews/screens/login_page.dart';
+import 'package:pocketnews/constants.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.url, this.controller}) : super(key: key);
-  final String url;
+  HomePage({
+    Key key,
+    this.controller,
+  }) : super(key: key);
   final ScrollController controller;
   @override
   _HomePageState createState() => _HomePageState();
@@ -20,15 +21,41 @@ class _HomePageState extends State<HomePage> {
   List<Post> posts = List();
   bool isLoaded = false;
   bool isBookmarked = false;
+  String _url = kEnglishURL;
+  String _selectedLang = 'English';
+
+  void languageSelect() {
+    switch (_selectedLang) {
+      case 'English':
+        _url = kEnglishURL;
+        break;
+      case 'Hindi':
+        _url = kHindiURL;
+        break;
+      case 'Malayalam':
+        _url = kMalayalamURL;
+        break;
+      case 'Marathi':
+        _url = kMarathiURL;
+        break;
+      case 'Tamil':
+        _url = kTamilURL;
+        break;
+      case 'Telugu':
+        _url = kTeluguURL;
+        break;
+    }
+  }
 
   Future<void> _fetchData() async {
     try {
-      print(widget.url);
-      final response = await http.get(widget.url);
+      languageSelect();
+      print(_url);
+      final response = await http.get(_url);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         posts = (data["articles"] as List).map((posts) {
-          return Post.fromJSON(posts);
+          return Post.fromJSON(posts, _selectedLang);
         }).toList();
         setState(() {
           this.isLoaded = true;
@@ -41,7 +68,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    user.loggedInUser;
+    user.loggedInUserID;
     _fetchData();
     //print(widget.email);
     //print(widget.title);
@@ -51,28 +78,45 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text("Pocket News"),
         centerTitle: true,
         actions: <Widget>[
-          FlatButton(
-            child: Text("Log Out"),
-            textColor: Colors.white,
-            onPressed: () {
-              FirebaseAuth.instance
-                  .signOut()
-                  .then(
-                    (result) => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    ),
-                  )
-                  .catchError((err) => print(err));
-            },
-          )
+          DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              elevation: 15,
+              value: _selectedLang,
+              hint: Text(
+                'Platform',
+                style: TextStyle(color: Colors.grey),
+              ),
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: Colors.grey,
+              ),
+              dropdownColor: Colors.black,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              onChanged: (String value) {
+                print(value);
+                setState(() {
+                  isLoaded = false;
+                  _selectedLang = value;
+                });
+                _fetchData();
+              },
+              items: <String>['English', 'Hindi', 'Marathi', 'Malayalam', 'Tamil', 'Telugu']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
         ],
       ),
       body: RefreshIndicator(

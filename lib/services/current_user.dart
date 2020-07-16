@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-//class CurrentUser {
-String _loggedInUser;
+String _loggedInUserID;
 FirebaseUser currentUser;
 final _auth = FirebaseAuth.instance;
 
@@ -17,12 +16,11 @@ Future<String> getCurrentUser() async {
   return currentUser.uid;
 }
 
-String get loggedInUser {
-  if (_loggedInUser == null) {
+String get loggedInUserID {
+  if (_loggedInUserID == null) {
     getCurrentUser().then((value) {
-      _loggedInUser = value;
+      _loggedInUserID = value;
     });
   }
-  return _loggedInUser;
+  return _loggedInUserID;
 }
-//}
