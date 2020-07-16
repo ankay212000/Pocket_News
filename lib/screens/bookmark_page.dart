@@ -18,7 +18,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   void initState() {
     super.initState();
-    currentUser = user.loggedInUser;
+    currentUser = user.loggedInUserID;
   }
 
   @override

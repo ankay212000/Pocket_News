@@ -25,16 +25,14 @@ class _NavigateState extends State<Navigate> {
   initState() {
     super.initState();
     _hideBottomNavController.addListener(() {
-      if (_hideBottomNavController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
+      if (_hideBottomNavController.position.userScrollDirection == ScrollDirection.reverse) {
         //print("reverse");
         if (_isVisible)
           setState(() {
             _isVisible = false;
           });
       }
-      if (_hideBottomNavController.position.userScrollDirection ==
-          ScrollDirection.forward) {
+      if (_hideBottomNavController.position.userScrollDirection == ScrollDirection.forward) {
         //print("forward");
         if (!_isVisible)
           setState(() {
@@ -48,8 +46,6 @@ class _NavigateState extends State<Navigate> {
   Widget build(BuildContext context) {
     var _pageOptions = {
       1: HomePage(
-        url:
-            "https://newsapi.org/v2/top-headlines?country=in&category=&apiKey=ff94394ddcf74eb2be08755e5cd942e9",
         controller: _hideBottomNavController,
       ),
       2: UserPage(),

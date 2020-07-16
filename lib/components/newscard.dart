@@ -89,10 +89,12 @@ class _NewsCardState extends State<NewsCard> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    widget.post.name,
-                    style: TextStyle(fontWeight: FontWeight.bold), //, fontSize: deviceHeight * 0.011
-                  ),
+                  child: widget.post.name == null
+                      ? Container()
+                      : Text(
+                          widget.post.name,
+                          style: TextStyle(fontWeight: FontWeight.bold), //, fontSize: deviceHeight * 0.011
+                        ),
                 ),
                 Spacer(),
                 widget.post.author != null
