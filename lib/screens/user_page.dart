@@ -19,12 +19,9 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     final CurvedNavigationBar navigationBar = widget.globalKey.currentWidget;
+    final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: Text('My Profile'),
-        centerTitle: true,
-      ),
       body: CustomScrollView(
         controller: widget.controller,
         shrinkWrap: true,
@@ -39,19 +36,22 @@ class _UserPageState extends State<UserPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.orange[900],
-                          child: Center(
-                            child: Text(
-                              widget.fname[0],
-                              style: TextStyle(
-                                  fontSize: 70.0, color: Colors.white),
+                        child: Padding(
+                          padding: EdgeInsets.only(top:deviceHeight*0.06),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.orange[900],
+                            child: Center(
+                              child: Text(
+                                widget.fname[0],
+                                style: TextStyle(
+                                    fontSize: 70.0, color: Colors.white),
+                              ),
                             ),
+                            // backgroundImage: AssetImage(
+                            //   'assets/images/profileimage.png',
+                            // ),
+                            radius: MediaQuery.of(context).size.height * 0.09,
                           ),
-                          // backgroundImage: AssetImage(
-                          //   'assets/images/profileimage.png',
-                          // ),
-                          radius: MediaQuery.of(context).size.height * 0.09,
                         ),
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.03),
@@ -60,7 +60,7 @@ class _UserPageState extends State<UserPage> {
                         children: <Widget>[
                           Text(
                             widget.fname + " " + widget.surname,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white,fontSize: 30.0)
                           )
                         ],
                       ),
