@@ -275,12 +275,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
                       onPressed: () {
-                        setState(() {
-                          showSpinner = true;
-                        });
-
                         if (_registerFormKey.currentState.validate()) {
                           if (pwdInputController.text == confirmPwdInputController.text) {
+                            setState(() {
+                              showSpinner = true;
+                            });
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                                     email: emailInputController.text, password: pwdInputController.text)
@@ -360,9 +359,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               },
                             );
                           } else {
-                            setState(() {
-                              showSpinner = false;
-                            });
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
