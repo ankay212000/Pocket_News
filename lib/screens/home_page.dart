@@ -101,7 +101,6 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
               ),
               onChanged: (String value) {
-                print(value);
                 setState(() {
                   isLoaded = false;
                   _selectedLang = value;

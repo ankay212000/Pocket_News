@@ -1,5 +1,3 @@
-import 'package:pocketnews/constants.dart';
-
 class Post {
   final String id, name, author, title, description, url, image, publishedAt, documentID;
 
