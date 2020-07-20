@@ -125,7 +125,7 @@ class _NewsCardState extends State<NewsCard> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
-              child: Text(widget.post.publishedAt),
+              child: widget.post.publishedAt != null ? Text(widget.post.publishedAt) : Container(),
             ),
             widget.post.description != null
                 ? Padding(
@@ -198,7 +198,19 @@ class _NewsCardState extends State<NewsCard> {
                                 Icons.delete,
                               ),
                               onPressed: () {
+                                Post post = widget.post;
                                 addBookmark.removeData(widget.post.documentID);
+                                final snackBar = SnackBar(
+                                  content: Text('Bookmark removed'),
+                                  duration: Duration(seconds: 2),
+                                  action: SnackBarAction(
+                                    label: 'Undo',
+                                    onPressed: () {
+                                      addBookmark.addData(post);
+                                    },
+                                  ),
+                                );
+                                Scaffold.of(context).showSnackBar(snackBar);
                               },
                             )
                           : SizedBox()),
