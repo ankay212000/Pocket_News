@@ -150,15 +150,24 @@ class _NewsCardState extends State<NewsCard> {
                 Container(
                   child: widget.isHomePage
                       ? (isBookmarked
-                          ? Text(
-                              'SAVED',
-                              style: TextStyle(color: Colors.green),
+                          ? IconButton(
+                              icon: Icon(Icons.bookmark),
+                              onPressed: () {
+                                final snackBar = SnackBar(
+                                  content: Text('Bookmark deleted'),
+                                  duration: Duration(seconds: 1),
+                                );
+                                Scaffold.of(context).showSnackBar(snackBar);
+                                String bookmarkDocumentID = addBookmark.newsDocumentID;
+                                addBookmark.removeData(bookmarkDocumentID);
+                                print("bookmarkDocumentID: $bookmarkDocumentID");
+                                setState(() {
+                                  isBookmarked = !isBookmarked;
+                                });
+                              },
                             )
-                          : FlatButton(
-                              child: Text(
-                                'SAVE',
-                                style: TextStyle(color: Colors.blueAccent),
-                              ),
+                          : IconButton(
+                              icon: Icon(Icons.bookmark_border),
                               onPressed: () {
                                 addBookmark.addData(widget.post);
                                 setState(() {
@@ -166,7 +175,8 @@ class _NewsCardState extends State<NewsCard> {
                                 });
 
                                 final snackBar = SnackBar(
-                                  content: Text('Bookmark has been saved.'),
+                                  content: Text('Bookmark saved'),
+                                  duration: Duration(seconds: 2),
                                   action: SnackBarAction(
                                     label: 'Undo',
                                     onPressed: () {
@@ -183,12 +193,9 @@ class _NewsCardState extends State<NewsCard> {
                               },
                             )) //To add bookmark
                       : (isBookmarked
-                          ? FlatButton(
-                              child: Text(
-                                'DELETE',
-                                style: TextStyle(
-                                  color: Colors.redAccent,
-                                ),
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.delete,
                               ),
                               onPressed: () {
                                 addBookmark.removeData(widget.post.documentID);
@@ -204,9 +211,3 @@ class _NewsCardState extends State<NewsCard> {
     );
   }
 }
-
-/*
-
-
-
- */
