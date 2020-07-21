@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
-import 'home_page.dart';
+import 'package:pocketnews/services/check.dart';
+import 'package:pocketnews/services/navigate.dart';
 import 'package:pocketnews/services/Register.dart';
 import 'package:pocketnews/components/modal_progress_indicator.dart';
 
@@ -196,11 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => HomePage(
-                                        title: result['fname'],
-                                        uid: currentUser.uid,
-                                        email: emailInputController.text,
-                                      ),
+                                      builder: (context) => Check(),
                                     ),
                                   );
                                   })

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketnews/screens/login_page.dart';
-import 'package:pocketnews/screens/home_page.dart';
+import 'package:pocketnews/services/navigate.dart';
 
 class Check extends StatefulWidget {
   @override
@@ -14,27 +14,33 @@ class _CheckState extends State<Check> {
   initState() {
     FirebaseAuth.instance.currentUser().then((currentUser) => {
           if (currentUser == null)
-            {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()))}
+            {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => LoginPage()))
+            }
           else
             {
               Firestore.instance
                   .collection("users")
                   .document(currentUser.uid)
                   .get()
-                  .then(
-                    (DocumentSnapshot result) => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(
-                          title: result["fname"],
-                          email: currentUser.email,
-                        ),
-                      ),
+                  .then((DocumentSnapshot result) {
+              
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Navigate(
+                      uid: currentUser.uid,
+                      email: result.data['email'],
+                      fname: result.data['fname'],
+                      surname: result.data['surname'],
                     ),
-                  )
-                  .catchError((err) => print(err))
+                  ),
+                );
+              }).catchError((err) => print(err))
             }
         });
+
     super.initState();
   }
 
