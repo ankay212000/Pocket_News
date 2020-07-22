@@ -36,6 +36,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: 
+  flutter_email_sender: ^3.0.1
 
 flutter_icons:
   android: true
