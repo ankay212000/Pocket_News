@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pocketnews/screens/login_page.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key, this.controller, this.fname, this.surname, this.globalKey})
@@ -16,6 +17,25 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  Future<void> send() async {
+    final Email email = Email(
+      body: "Body",
+      subject: "Feedback",
+      recipients: ["psocproject@gmail.com"],
+    );
+
+    String platformResponse;
+
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
+    }
+
+    if (!mounted) return;
+  }
+
   @override
   Widget build(BuildContext context) {
     final CurvedNavigationBar navigationBar = widget.globalKey.currentWidget;
@@ -37,7 +57,7 @@ class _UserPageState extends State<UserPage> {
                     children: <Widget>[
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.only(top:deviceHeight*0.06),
+                          padding: EdgeInsets.only(top: deviceHeight * 0.06),
                           child: CircleAvatar(
                             backgroundColor: Colors.orange[900],
                             child: Center(
@@ -54,17 +74,18 @@ class _UserPageState extends State<UserPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            widget.fname + " " + widget.surname,
-                            style: TextStyle(color: Colors.white,fontSize: 30.0)
-                          )
+                          Text(widget.fname + " " + widget.surname,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 30.0))
                         ],
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -99,7 +120,8 @@ class _UserPageState extends State<UserPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height:MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
                       Column(
                         children: <Widget>[
                           ListTile(
@@ -136,7 +158,9 @@ class _UserPageState extends State<UserPage> {
                               Icons.navigate_next,
                               color: Colors.white,
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              send();
+                            },
                           ),
                           ListTile(
                             leading: Icon(
