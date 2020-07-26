@@ -12,3 +12,4 @@ const kMarathiURL = "https://api.breakingapi.com/news?q=&type=headlines&locale=m
 const kTamilURL = "https://api.breakingapi.com/news?q=&type=headlines&locale=ta-IN&api_key=$kApiKey";
 
 const kTeluguURL = "https://api.breakingapi.com/news?q=&type=headlines&locale=te-IN&api_key=$kApiKey";
+

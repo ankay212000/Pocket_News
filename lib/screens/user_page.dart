@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pocketnews/screens/login_page.dart';
+import 'package:pocketnews/screens/homeSports.dart';
+import 'package:pocketnews/screens/homeScience.dart';
+import 'package:pocketnews/screens/homeBusiness.dart';
+import 'package:pocketnews/screens/homeHealth.dart';
+import 'package:pocketnews/screens/homeTechnology.dart';
+import 'package:pocketnews/screens/homeEntertainment.dart';
+
 
 class UserPage extends StatefulWidget {
   UserPage({Key key, this.controller, this.fname, this.surname, this.globalKey})
@@ -90,7 +97,8 @@ class _UserPageState extends State<UserPage> {
                                   "assests/images/science.jpg",
                                   Icons.wb_incandescent),
                               categoryCard("Sports",
-                                  "assests/images/sports.jpeg", Icons.person),
+                                  "assests/images/sports.jpeg", Icons.person
+                                  ),
                               categoryCard(
                                   "Technology",
                                   "assests/images/technology.jpeg",
@@ -162,7 +170,7 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                   )
                                   .catchError((err) => print(err));
-                              navigationBar.onTap(1);
+                              //navigationBar.onTap(1);
                             },
                           ),
                         ],
@@ -178,7 +186,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget categoryCard(String categoryName, String image, IconData icon) {
+  Widget categoryCard(String categoryName, String image, IconData icons) {
     return Container(
       margin: EdgeInsets.only(bottom: 15.0),
       height: MediaQuery.of(context).size.height * 0.08,
@@ -196,27 +204,64 @@ class _UserPageState extends State<UserPage> {
       ),
       child: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0.0,
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  icon,
+          Row(
+            children: <Widget>[
+              FlatButton.icon(
+                onPressed: (){
+                  if(categoryName=="Sports"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageSports(),
+                        ));
+                }
+                 if(categoryName=="Science"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageScience(),
+                        ));
+                }
+                if(categoryName=="Bussiness"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageB(),
+                        ));
+                }
+                if(categoryName=="Entertainment"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageE(),
+                        ));
+                }
+                if(categoryName=="Health"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageH(),
+                        ));
+                }
+                if(categoryName=="Technology"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageT(),
+                        ));
+                }
+                },
+                icon: Icon(icons,color: Colors.white,), 
+                label:Text(
+                '$categoryName',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
                   color: Colors.white,
                 ),
-                SizedBox(
-                  width: 3.0,
-                ),
-                Text(
-                  '$categoryName',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: Colors.white,
                   ),
-                ),
-              ],
-            ),
+                )
+            ],
           ),
         ],
       ),
