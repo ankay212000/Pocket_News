@@ -4,10 +4,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pocketnews/screens/login_page.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:pocketnews/services/current_user.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({Key key, this.controller, this.fname, this.surname, this.globalKey})
-      : super(key: key);
+  UserPage({Key key, this.controller, this.fname, this.surname, this.globalKey}) : super(key: key);
   final ScrollController controller;
   GlobalKey globalKey;
   String fname;
@@ -63,8 +64,7 @@ class _UserPageState extends State<UserPage> {
                             child: Center(
                               child: Text(
                                 widget.fname[0],
-                                style: TextStyle(
-                                    fontSize: 70.0, color: Colors.white),
+                                style: TextStyle(fontSize: 70.0, color: Colors.white),
                               ),
                             ),
                             // backgroundImage: AssetImage(
@@ -74,18 +74,15 @@ class _UserPageState extends State<UserPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(widget.fname + " " + widget.surname,
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 30.0))
+                              style: TextStyle(color: Colors.white, fontSize: 30.0))
                         ],
                       ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -93,35 +90,24 @@ class _UserPageState extends State<UserPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               categoryCard(
-                                  "Bussiness",
-                                  "assests/images/bussiness.jpeg",
-                                  Icons.business),
-                              categoryCard(
-                                  "Entertainment",
-                                  "assests/images/entertainment.jpeg",
+                                  "Bussiness", "assests/images/bussiness.jpeg", Icons.business),
+                              categoryCard("Entertainment", "assests/images/entertainment.jpeg",
                                   Icons.movie_filter),
-                              categoryCard("Health",
-                                  "assests/images/health.jpeg", Icons.favorite),
+                              categoryCard("Health", "assests/images/health.jpeg", Icons.favorite),
                             ],
                           ),
                           Column(
                             children: <Widget>[
                               categoryCard(
-                                  "Science",
-                                  "assests/images/science.jpg",
-                                  Icons.wb_incandescent),
-                              categoryCard("Sports",
-                                  "assests/images/sports.jpeg", Icons.person),
+                                  "Science", "assests/images/science.jpg", Icons.wb_incandescent),
+                              categoryCard("Sports", "assests/images/sports.jpeg", Icons.person),
                               categoryCard(
-                                  "Technology",
-                                  "assests/images/technology.jpeg",
-                                  Icons.devices),
+                                  "Technology", "assests/images/technology.jpeg", Icons.devices),
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                       Column(
                         children: <Widget>[
                           ListTile(
@@ -175,17 +161,29 @@ class _UserPageState extends State<UserPage> {
                               Icons.navigate_next,
                               color: Colors.white,
                             ),
-                            onTap: () {
-                              FirebaseAuth.instance
-                                  .signOut()
-                                  .then(
-                                    (result) => Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage()),
-                                    ),
-                                  )
-                                  .catchError((err) => print(err));
+                            onTap: () async {
+                              print("Login Mode: " + loginMode);
+
+                              if (loginMode == "google") {
+                                GoogleSignIn googleSignIn = GoogleSignIn();
+                                await googleSignIn
+                                    .signOut()
+                                    .then((value) => Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => LoginPage()),
+                                        ))
+                                    .catchError((err) => print(err));
+                              } else {
+                                FirebaseAuth.instance
+                                    .signOut()
+                                    .then(
+                                      (result) => Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => LoginPage()),
+                                      ),
+                                    )
+                                    .catchError((err) => print(err));
+                              }
                               navigationBar.onTap(1);
                             },
                           ),

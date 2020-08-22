@@ -8,41 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:595713438388:android:6985e7c902e18c9bac9de1",
-        "android_client_info": {
-          "package_name": "com.example.news"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "595713438388-1ivrlppk3rrbevme66b680r2d4h6g6mv.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBGxQakeGCjmoR8io-vTp9BAqLhWrkwNeM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "595713438388-1ivrlppk3rrbevme66b680r2d4h6g6mv.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:595713438388:android:0a4702a70dda96dbac9de1",
         "android_client_info": {
           "package_name": "com.example.pocketnews"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "595713438388-5nhhmj1mbqgttf3eoad96h5p9thl325q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pocketnews",
+            "certificate_hash": "b7f99b7ca5811718abebeda04710073665711be4"
+          }
+        },
         {
           "client_id": "595713438388-1ivrlppk3rrbevme66b680r2d4h6g6mv.apps.googleusercontent.com",
           "client_type": 3
