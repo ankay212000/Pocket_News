@@ -26,12 +26,12 @@ It is linked to firebase services at backend.
 4. Recommended for you feature.
 
 ## Google Sign In
-  Package Requirement: firebase_auth (for Firebase authentication) & google_sign_in (to implement Google sign-in)
+  Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
   
   SHA Key is added in the Firebase project for authenticating client (for Debug Mode)
   (Documentation: https://developers.google.com/android/guides/client-auth)
   
-  For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons package</a> is used.
+  For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons</a> is used.
   
   
 
