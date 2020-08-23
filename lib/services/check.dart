@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketnews/screens/login_page.dart';
 import 'package:pocketnews/services/navigate.dart';
+import 'package:pocketnews/services/current_user.dart';
 
 class Check extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _CheckState extends State<Check> {
                   .document(currentUser.uid)
                   .get()
                   .then((DocumentSnapshot result) {
-              
+                loginMode = result.data['loginMode'];
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

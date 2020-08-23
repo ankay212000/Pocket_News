@@ -62,7 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
               ),
               child: Column(
                 children: <Widget>[
@@ -148,8 +149,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,
                               ),
-                              hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
-                              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                              hintStyle:
+                                  TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(32.0)),
                               ),
@@ -282,7 +285,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             });
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
-                                    email: emailInputController.text, password: pwdInputController.text)
+                                    email: emailInputController.text,
+                                    password: pwdInputController.text)
                                 .then(
                                   (currentUser) => Firestore.instance
                                       .collection("users")
@@ -292,6 +296,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         "fname": firstNameInputController.text,
                                         "surname": lastNameInputController.text,
                                         "email": emailInputController.text,
+                                        "loginMode": "email",
                                       })
                                       .then((result) => {
                                             {

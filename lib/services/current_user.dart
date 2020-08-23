@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
 
 String _loggedInUserID;
 FirebaseUser currentUser;
@@ -24,3 +25,6 @@ String get loggedInUserID {
   }
   return _loggedInUserID;
 }
+
+///SIGN-IN Mode
+String loginMode = "";
