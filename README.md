@@ -17,11 +17,23 @@ It is linked to firebase services at backend.
 1. Get latest 1 hour news refreshed every time.
 2. Firebase authentication login and Registration
 3. Sharing of news via any sharing medium
+
+
 # Future Features
 1. More varied news can be added using more APIs(can be created using web scraping) or can be found one.
 2. Bookmark and like feature.
 3. Pages for user, bookmarked, liked pages.
 4. Recommended for you feature.
+
+## Google Sign In
+  Package Requirement: firebase_auth (for Firebase authentication) & google_sign_in (to implement Google sign-in)
+  
+  SHA Key is added in the Firebase project for authenticating client (for Debug Mode)
+  (Documentation: https://developers.google.com/android/guides/client-auth)
+  
+  For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons package</a> is used.
+  
+  
 
 ## Images
 
