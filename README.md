@@ -18,13 +18,6 @@ It is linked to firebase services at backend.
 2. Firebase authentication login and Registration
 3. Sharing of news via any sharing medium
 
-
-# Future Features
-1. More varied news can be added using more APIs(can be created using web scraping) or can be found one.
-2. Bookmark and like feature.
-3. Pages for user, bookmarked, liked pages.
-4. Recommended for you feature.
-
 ## Google Sign In
   Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
   
@@ -33,7 +26,13 @@ It is linked to firebase services at backend.
   
   For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons</a> is used.
   
-  
+
+# Future Features
+1. More varied news can be added using more APIs(can be created using web scraping) or can be found one.
+2. Bookmark and like feature.
+3. Pages for user, bookmarked, liked pages.
+4. Recommended for you feature.
+ 
 
 ## Images
 
