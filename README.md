@@ -29,7 +29,7 @@ It is linked to firebase services at backend.
   Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
   
   SHA Key is added in the Firebase project for authenticating client (for Debug Mode)
-  (Documentation: https://developers.google.com/android/guides/client-auth)
+  Documentation: https://developers.google.com/android/guides/client-auth
   
   For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons</a> is used.
   
