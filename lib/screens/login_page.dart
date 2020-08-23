@@ -309,7 +309,6 @@ class _LoginPageState extends State<LoginPage> {
                           Firestore.instance.collection("users").document(currentUser.uid).setData({
                             "uid": currentUser.uid,
                             "fname": currentUser.displayName,
-                            "surname": "",
                             "email": currentUser.email,
                             "loginMode": "google",
                           }).then((result) {

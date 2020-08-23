@@ -6,12 +6,11 @@ import 'package:pocketnews/screens/user_page.dart';
 import 'package:pocketnews/screens/bookmark_page.dart';
 
 class Navigate extends StatefulWidget {
-  Navigate({Key key, this.title, this.uid, this.email,this.fname,this.surname}) : super(key: key);
+  Navigate({Key key, this.title, this.uid, this.email,this.fname}) : super(key: key);
   final String title;
   final String uid;
   final String email;
   final String fname;
-  final String surname;
   @override
   _NavigateState createState() => _NavigateState();
 }
@@ -58,7 +57,6 @@ class _NavigateState extends State<Navigate> {
       2: UserPage(
           controller: _hideBottomNavController,
           fname: widget.fname,
-          surname:widget.surname,
           globalKey: bottomNavigationKey),
     };
     final deviceHeight = MediaQuery.of(context).size.height;

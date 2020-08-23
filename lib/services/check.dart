@@ -34,7 +34,6 @@ class _CheckState extends State<Check> {
                       uid: currentUser.uid,
                       email: result.data['email'],
                       fname: result.data['fname'],
-                      surname: result.data['surname'],
                     ),
                   ),
                 );

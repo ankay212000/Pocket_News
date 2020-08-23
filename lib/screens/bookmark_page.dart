@@ -33,7 +33,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
           controller: widget.controller,
         ),
       ),
-      backgroundColor: Colors.black54,
+      backgroundColor: Colors.white,
     );
   }
 }
