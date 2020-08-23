@@ -24,7 +24,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   initState() {
     firstNameInputController = new TextEditingController();
-    lastNameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
@@ -62,14 +61,15 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
               ),
               child: Column(
                 children: <Widget>[
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Container(
                         height: deviceHeight * 0.15,
                         width: deviceHeight * 0.15,
@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   SizedBox(
-                    height: deviceHeight * 0.05,
+                    height: deviceHeight * 0.09,
                   ),
                   Form(
                     key: _registerFormKey,
@@ -135,40 +135,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: deviceHeight * 0.02,
-                        ),
-                        TextFormField(
-                            style: TextStyle(color: Colors.white),
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              labelText: 'Last Name*',
-                              hintText: "Doe",
-                              labelStyle: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w100,
-                              ),
-                              hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
-                              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                              ),
-                            ),
-                            controller: lastNameInputController,
-                            // ignore: missing_return
-                            validator: (value) {
-                              if (value.length < 3) {
-                                return "Please enter a valid last name. Character>3";
-                              }
-                            }),
                         SizedBox(
                           height: deviceHeight * 0.02,
                         ),
@@ -282,7 +248,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             });
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
-                                    email: emailInputController.text, password: pwdInputController.text)
+                                    email: emailInputController.text,
+                                    password: pwdInputController.text)
                                 .then(
                                   (currentUser) => Firestore.instance
                                       .collection("users")
@@ -290,8 +257,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       .setData({
                                         "uid": currentUser.uid,
                                         "fname": firstNameInputController.text,
-                                        "surname": lastNameInputController.text,
                                         "email": emailInputController.text,
+                                        "loginMode": "email",
                                       })
                                       .then((result) => {
                                             {
