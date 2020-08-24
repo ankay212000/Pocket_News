@@ -1,6 +1,9 @@
 # Pocket News (PClub Summer of Code Project)
 <img src="WhatsApp%20Image%202020-06-26%20at%208.00.13%20PM.jpeg" width=350 height=350>
 
+## Special Thanks to contributors
+ <a href="https://github.com/anand-aman">Aman Anand</a>, <a href="https://github.com/tanvibattu">Tanvi Battu</a>
+ 
 A crossplatform app designed to get news after every 1 hour,
 It is linked to firebase services at backend.
 ## Requirements
@@ -13,7 +16,7 @@ It is linked to firebase services at backend.
 2. Add an emulator or any physical device in developer mode for debugging
 3. Run the main.dart file
 4. To make changes to login sysytem or user level the app should be connected to firebase services hence firebase project need to be there
-## Google Sign In
+## Google Sign In 
   Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
   
   SHA Key is added in the Firebase project for authenticating client (for Debug Mode)<br>
