@@ -190,7 +190,7 @@ class _UserPageState extends State<UserPage> {
                                     )
                                     .catchError((err) => print(err));
                               }
-                              navigationBar.onTap(1);
+                              //navigationBar.onTap(1);
                             },
                           ),
                         ],
