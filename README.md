@@ -13,6 +13,13 @@ It is linked to firebase services at backend.
 2. Add an emulator or any physical device in developer mode for debugging
 3. Run the main.dart file
 4. To make changes to login sysytem or user level the app should be connected to firebase services hence firebase project need to be there
+## Google Sign In
+  Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
+  
+  SHA Key is added in the Firebase project for authenticating client (for Debug Mode)<br>
+  Documentation: https://developers.google.com/android/guides/client-auth
+  
+  For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons</a> is used.
 ## Features
 1. Get latest 1 hour news refreshed every time.
 2. Firebase authentication login and Registration
