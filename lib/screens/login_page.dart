@@ -36,9 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<FirebaseUser> signInWithGoogle() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    setState(() {
-      showSpinner = true;
-    });
+
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
 
@@ -305,10 +303,14 @@ class _LoginPageState extends State<LoginPage> {
                       darkMode: true,
                       onPressed: () {
                         signInWithGoogle().then((currentUser) {
+                          setState(() {
+                            showSpinner = true;
+                          });
                           print(currentUser.providerId);
                           Firestore.instance.collection("users").document(currentUser.uid).setData({
                             "uid": currentUser.uid,
                             "fname": currentUser.displayName,
+                            "surname": "",
                             "email": currentUser.email,
                             "loginMode": "google",
                           }).then((result) {
@@ -343,6 +345,9 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             );
                           });
+                        });
+                        setState(() {
+                          showSpinner = false;
                         });
                       },
                     ),
