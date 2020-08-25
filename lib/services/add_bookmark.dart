@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketnews/components/post.dart';
 import 'package:pocketnews/services/current_user.dart' as user;
+import 'package:pocketnews/services/bookmark_map.dart';
 
 String _newsDocumentID;
 String get newsDocumentID {
@@ -17,7 +18,11 @@ void addData(Post post) {
   }
   print("Bookmark Triggered for $currentUser");
   print(post.publishedAt);
-  Firestore.instance.collection("users").document(currentUser).collection("saves").add({}).then((docRef) {
+  Firestore.instance
+      .collection("users")
+      .document(currentUser)
+      .collection("saves")
+      .add({}).then((docRef) {
     Firestore.instance
         .collection("users")
         .document(currentUser)
@@ -39,7 +44,7 @@ void addData(Post post) {
   });
 }
 
-void removeData(String documentID) {
+void removeData({String documentID, String bookmarkURL}) {
   String currentUser = user.loggedInUserID;
   if (currentUser == null) {
     print("Login again");
@@ -52,8 +57,9 @@ void removeData(String documentID) {
       .collection("saves")
       .document(documentID)
       .delete()
-      .then(
-        (value) => print("Bookmark deleted."),
-      );
+      .then((value) {
+    print("Bookmark deleted.");
+    bookmarkMap.remove(bookmarkURL);
+  });
 }
 //}

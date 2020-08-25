@@ -179,8 +179,8 @@ class _NewsCardState extends State<NewsCard> {
                                   duration: Duration(seconds: 1),
                                 );
                                 Scaffold.of(context).showSnackBar(snackBar);
-                                addBookmark.removeData(savedBookmarkDocId);
-                                bookmarkMap.remove(widget.post.url);
+                                addBookmark.removeData(
+                                    documentID: savedBookmarkDocId, bookmarkURL: widget.post.url);
                                 print("bookmarkDocumentID: $savedBookmarkDocId");
                                 setState(() {
                                   isBookmarked = !isBookmarked;
@@ -202,7 +202,9 @@ class _NewsCardState extends State<NewsCard> {
                                     label: 'Undo',
                                     onPressed: () {
                                       String bookmarkDocumentID = addBookmark.newsDocumentID;
-                                      addBookmark.removeData(bookmarkDocumentID);
+                                      addBookmark.removeData(
+                                          documentID: bookmarkDocumentID,
+                                          bookmarkURL: widget.post.url);
                                       print("bookmarkDocumentID: $bookmarkDocumentID");
                                       setState(() {
                                         isBookmarked = !isBookmarked;
@@ -220,7 +222,9 @@ class _NewsCardState extends State<NewsCard> {
                               ),
                               onPressed: () {
                                 Post post = widget.post;
-                                addBookmark.removeData(widget.post.documentID);
+                                addBookmark.removeData(
+                                    documentID: widget.post.documentID,
+                                    bookmarkURL: widget.post.url);
                                 final snackBar = SnackBar(
                                   content: Text('Bookmark removed'),
                                   duration: Duration(seconds: 2),

@@ -20,7 +20,8 @@ void getBookmarkStream(String userID) {
       .snapshots()
       .listen((QuerySnapshot snapshot) {
     snapshot.documents.forEach((bookmark) {
-      bookmarkMap[bookmark.data['url']] = bookmark.documentID;
+      if (!bookmarkMap.containsKey(bookmark.data['url']))
+        bookmarkMap[bookmark.data['url']] = bookmark.documentID;
     });
     bookmarkMap.forEach((key, value) {
       print("Bookmark Data " + key + " " + value);
