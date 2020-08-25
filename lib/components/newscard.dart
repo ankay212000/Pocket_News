@@ -6,6 +6,7 @@ import 'webview.dart';
 import 'package:marquee/marquee.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:pocketnews/services/add_bookmark.dart' as addBookmark;
+import 'package:pocketnews/services/bookmark_map.dart';
 
 class NewsCard extends StatefulWidget {
   final Post post;
@@ -20,14 +21,26 @@ class NewsCard extends StatefulWidget {
 class _NewsCardState extends State<NewsCard> {
   bool isLiked = false;
   bool isBookmarked;
+  String savedBookmarkDocId;
+
+  void checkBookmarked() {
+    if (widget.isHomePage) {
+      isBookmarked = bookmarkMap.containsKey(widget.post.url);
+      if (isBookmarked) {
+        savedBookmarkDocId = bookmarkMap[widget.post.url];
+      }
+    } else {
+      isBookmarked = widget.isBookmark;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    print(widget.post);
-    print(widget.isBookmark);
-    print(widget.isHomePage);
-    isBookmarked = widget.isBookmark;
+//    print(widget.post);
+//    print(widget.isBookmark);
+//    print(widget.isHomePage);
+    checkBookmarked();
   }
 
   @override
@@ -65,8 +78,14 @@ class _NewsCardState extends State<NewsCard> {
                           gradient: LinearGradient(
                               begin: FractionalOffset.bottomCenter,
                               end: FractionalOffset.center,
-                              colors: [Colors.black.withOpacity(0.55), Colors.black.withOpacity(0.15)],
-                              stops: [0.2, 2.0]),
+                              colors: [
+                                Colors.black.withOpacity(0.55),
+                                Colors.black.withOpacity(0.15)
+                              ],
+                              stops: [
+                                0.2,
+                                2.0
+                              ]),
                         ),
                         alignment: Alignment.bottomCenter,
                         child: Padding(
@@ -93,7 +112,8 @@ class _NewsCardState extends State<NewsCard> {
                       ? Container()
                       : Text(
                           widget.post.name,
-                          style: TextStyle(fontWeight: FontWeight.bold), //, fontSize: deviceHeight * 0.011
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold), //, fontSize: deviceHeight * 0.011
                         ),
                 ),
                 Spacer(),
@@ -105,7 +125,8 @@ class _NewsCardState extends State<NewsCard> {
                           avatar: Icon(Icons.edit),
                           label: Container(
                             height: 16.0,
-                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.42),
+                            constraints:
+                                BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.42),
                             child: AutoSizeText(
                               widget.post.author,
                               maxLines: 1,
@@ -158,9 +179,9 @@ class _NewsCardState extends State<NewsCard> {
                                   duration: Duration(seconds: 1),
                                 );
                                 Scaffold.of(context).showSnackBar(snackBar);
-                                String bookmarkDocumentID = addBookmark.newsDocumentID;
-                                addBookmark.removeData(bookmarkDocumentID);
-                                print("bookmarkDocumentID: $bookmarkDocumentID");
+                                addBookmark.removeData(savedBookmarkDocId);
+                                bookmarkMap.remove(widget.post.url);
+                                print("bookmarkDocumentID: $savedBookmarkDocId");
                                 setState(() {
                                   isBookmarked = !isBookmarked;
                                 });

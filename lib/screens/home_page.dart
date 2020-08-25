@@ -5,6 +5,7 @@ import 'package:pocketnews/components/post.dart';
 import 'package:pocketnews/components/newscard.dart';
 import 'package:pocketnews/services/current_user.dart' as user;
 import 'package:pocketnews/constants.dart';
+import 'package:pocketnews/services/bookmark_map.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
