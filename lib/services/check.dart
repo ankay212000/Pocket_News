@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketnews/screens/login_page.dart';
 import 'package:pocketnews/services/navigate.dart';
 import 'package:pocketnews/services/current_user.dart';
+import 'package:pocketnews/services/bookmark_map.dart';
 
 class Check extends StatefulWidget {
   @override
@@ -27,6 +28,7 @@ class _CheckState extends State<Check> {
                   .get()
                   .then((DocumentSnapshot result) {
                 loginMode = result.data['loginMode'];
+                getBookmarkStream(currentUser.uid);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
