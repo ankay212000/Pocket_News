@@ -17,7 +17,7 @@ It is linked to firebase services at backend.
 3. Run the main.dart file
 4. To make changes to login sysytem or user level the app should be connected to firebase services hence firebase project need to be there
 5. Run flutter pub get command on your terminal
-## Google Sign In (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
+## Google Sign In
   Package Requirement: <a href="https://pub.dev/packages/firebase_auth">firebase_auth</a> (for Firebase authentication) & <a href="https://pub.dev/packages/google_sign_in">google_sign_in</a> (to implement Google sign-in)
   
   SHA Key is added in the Firebase project for authenticating client (for Debug Mode)<br>
@@ -26,7 +26,7 @@ It is linked to firebase services at backend.
   For Google Sign in Button <a href="https://pub.dev/packages/flutter_auth_buttons">flutter_auth_buttons</a> is used.
 ## Features
 1. Get latest 1 hour news refreshed every time.
-2. Firebase authentication login and Registration,Google Sign in
+2. Firebase authentication login and Registration,Google Sign in (Google sign in implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
 3. Sharing of news via any sharing medium
 4. Bookmark feature (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
 5. Multilingual news (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
