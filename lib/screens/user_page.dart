@@ -6,13 +6,18 @@ import 'package:pocketnews/screens/login_page.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:pocketnews/services/current_user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pocketnews/screens/homeSports.dart';
+import 'package:pocketnews/screens/homeScience.dart';
+import 'package:pocketnews/screens/homeBusiness.dart';
+import 'package:pocketnews/screens/homeHealth.dart';
+import 'package:pocketnews/screens/homeTechnology.dart';
+import 'package:pocketnews/screens/homeEntertainment.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({Key key, this.controller, this.fname, this.surname, this.globalKey}) : super(key: key);
+  UserPage({Key key, this.controller, this.fname, this.globalKey}) : super(key: key);
   final ScrollController controller;
   GlobalKey globalKey;
   String fname;
-  String surname;
   @override
   _UserPageState createState() => _UserPageState();
 }
@@ -78,7 +83,7 @@ class _UserPageState extends State<UserPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(widget.fname + " " + widget.surname,
+                          Text(widget.fname,
                               style: TextStyle(color: Colors.white, fontSize: 30.0))
                         ],
                       ),
@@ -200,7 +205,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget categoryCard(String categoryName, String image, IconData icon) {
+ Widget categoryCard(String categoryName, String image, IconData icons) {
     return Container(
       margin: EdgeInsets.only(bottom: 15.0),
       height: MediaQuery.of(context).size.height * 0.08,
@@ -218,27 +223,64 @@ class _UserPageState extends State<UserPage> {
       ),
       child: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0.0,
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  icon,
+          Row(
+            children: <Widget>[
+              FlatButton.icon(
+                onPressed: (){
+                  if(categoryName=="Sports"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageSports(),
+                        ));
+                }
+                 if(categoryName=="Science"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageScience(),
+                        ));
+                }
+                if(categoryName=="Bussiness"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageB(),
+                        ));
+                }
+                if(categoryName=="Entertainment"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageE(),
+                        ));
+                }
+                if(categoryName=="Health"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageH(),
+                        ));
+                }
+                if(categoryName=="Technology"){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => HomePageT(),
+                        ));
+                }
+                },
+                icon: Icon(icons,color: Colors.white,), 
+                label:Text(
+                '$categoryName',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
                   color: Colors.white,
                 ),
-                SizedBox(
-                  width: 3.0,
-                ),
-                Text(
-                  '$categoryName',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: Colors.white,
                   ),
-                ),
-              ],
-            ),
+                )
+            ],
           ),
         ],
       ),
