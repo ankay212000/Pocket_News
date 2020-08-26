@@ -13,7 +13,6 @@ import 'package:pocketnews/screens/homeHealth.dart';
 import 'package:pocketnews/screens/homeTechnology.dart';
 import 'package:pocketnews/screens/homeEntertainment.dart';
 
-
 class UserPage extends StatefulWidget {
   UserPage({Key key, this.controller, this.fname, this.globalKey}) : super(key: key);
   final ScrollController controller;
@@ -190,6 +189,7 @@ class _UserPageState extends State<UserPage> {
                                     )
                                     .catchError((err) => print(err));
                               }
+//                              navigationBar.onTap(1);
                             },
                           ),
                         ],
@@ -205,7 +205,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget categoryCard(String categoryName, String image, IconData icons) {
+ Widget categoryCard(String categoryName, String image, IconData icons) {
     return Container(
       margin: EdgeInsets.only(bottom: 15.0),
       height: MediaQuery.of(context).size.height * 0.08,
