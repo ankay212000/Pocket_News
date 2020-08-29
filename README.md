@@ -29,7 +29,7 @@ It is linked to firebase services at backend.
 2. Firebase authentication login and Registration,Google Sign in (Google sign in implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
 3. Sharing of news via any sharing medium
 4. Bookmark feature (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
-5. Multilingual news (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)
+5. Multilingual news (implemented by <a href="https://github.com/anand-aman">Aman Anand</a>)(We have temporarily discarded this feature because we were using a demo api for this and now the site which provides api is down and other services are paid, so whenever we'll find a replacement of existing api,this feature will be added on)
 6. Categorized news (implemented by <a href="https://github.com/tanvibattu">Tanvi Battu</a>)
 7. Animation(including UI, Navigation,Naviagtion bar)(implemented by <a href="https://github.com/tanvibattu">Tanvi Battu</a>) 
 
