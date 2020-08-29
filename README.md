@@ -40,7 +40,8 @@ It is linked to firebase services at backend.
 ![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-21.gif)
 ## LoginPage(Email)
 ![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-22.gif)
-
+## Login(Google sign in)
+![Alt_Text](https://github.com/ankay212000/News_app_2.0/blob/master/InShot-20200829-224612880.gif)
 ## HomePage,Share,Bookmark
 ![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-22111.gif)
 ## FeedBack
