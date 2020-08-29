@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
         title: Text("Pocket News"),
         centerTitle: true,
-        actions: <Widget>[
+        /*actions: <Widget>[
           DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               elevation: 15,
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               }).toList(),
             ),
           ),
-        ],
+        ],*/
       ),
       body: RefreshIndicator(
         child: this.isLoaded
