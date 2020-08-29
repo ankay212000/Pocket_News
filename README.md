@@ -37,12 +37,22 @@ It is linked to firebase services at backend.
 1. Recommended for you feature.
 
 ## SplashPage
-<img src="Screenshot_2020-05-31-20-50-12-373_com.example.news.jpg" width=300 height=600>
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-21.gif)
 ## LoginPage
-<img src="Screenshot_2020-05-31-20-50-16-346_com.example.news.jpg" width=300 height=600>
-## RegistrationPage
-<img src="Screenshot_2020-05-31-20-50-50-288_com.example.news.jpg" width=300 height=600>
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-22.gif)
 ## HomePage
-<img src="Screenshot_2020-05-31-20-50-37-015_com.example.news.jpg" width=300 height=600>
-## Drawer
-<img src="Screenshot_2020-05-31-20-51-09-269_com.example.news.jpg" width=300 height=600>
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-21.gif)
+## FeedBack
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-23.gif)
+## Science News
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-24.gif)
+## Sports News
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-25%201.gif)
+## Entertainment News
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-25.gif)
+## Health News
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-252.gif)
+## Tech News
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-26.gif)
+## WebView
+![Alt Text](https://github.com/ankay212000/News_app_2.0/blob/master/Screenrecorder-2020-08-29-09-263.gif)
