@@ -1,6 +1,3 @@
-# Pocket News (PClub Summer of Code Project)
-<img src="WhatsApp%20Image%202020-06-26%20at%208.00.13%20PM.jpeg" width=350 height=350>
-
 ## Special Thanks to contributors
  <a href="https://github.com/anand-aman">Aman Anand</a>, <a href="https://github.com/tanvibattu">Tanvi Battu</a>
  
