@@ -64,6 +64,7 @@ flutter:
     - assests/images/
     - assests/images/75Fg.gif
     - assests/images/backg.jpg
+    - assests/images/google.jpg
     
 
   fonts:

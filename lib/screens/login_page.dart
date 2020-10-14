@@ -8,7 +8,6 @@ import 'package:pocketnews/services/navigate.dart';
 import 'package:pocketnews/services/Register.dart';
 import 'package:pocketnews/components/modal_progress_indicator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -81,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assests/images/backg.jpg"), fit: BoxFit.cover),
+                    image: AssetImage("assests/images/backg.jpg"),
+                    fit: BoxFit.cover),
               ),
               child: Form(
                 key: _loginFormKey,
@@ -134,18 +134,26 @@ class _LoginPageState extends State<LoginPage> {
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             hintText: 'Enter Your Email ID',
-                            hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
-                            contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                            hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                           ),
                         ),
@@ -162,18 +170,26 @@ class _LoginPageState extends State<LoginPage> {
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             hintText: 'Enter Password',
-                            hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
-                            contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                            hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w100),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 1.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              borderSide: BorderSide(
+                                  color: Colors.lightBlueAccent, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                             ),
                           ),
                         ),
@@ -183,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.symmetric(),
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text("Login"),
                         color: Theme.of(context).primaryColor,
@@ -289,7 +305,8 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => RegisterPage()),
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterPage()),
                               );
                             },
                           )
@@ -299,15 +316,48 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: deviceHeight * 0.025,
                     ),
-                    GoogleSignInButton(
-                      darkMode: true,
-                      onPressed: () {
+                    InkWell(
+                      child: Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height / 18,
+                          margin: EdgeInsets.only(top: 25),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Theme.of(context).primaryColor),
+                          child: Center(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+                                height: 30.0,
+                                width: 30.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assests/images/google.jpg'),
+                                      fit: BoxFit.cover),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              Text(
+                                'Sign in with Google',
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ))),
+                      onTap: () async {
                         signInWithGoogle().then((currentUser) {
                           setState(() {
                             showSpinner = true;
                           });
                           print(currentUser.providerId);
-                          Firestore.instance.collection("users").document(currentUser.uid).setData({
+                          Firestore.instance
+                              .collection("users")
+                              .document(currentUser.uid)
+                              .setData({
                             "uid": currentUser.uid,
                             "fname": currentUser.displayName,
                             "surname": "",
