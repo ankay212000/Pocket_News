@@ -1,9 +1,11 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pocketnews/screens/login_page.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:pocketnews/screens/logout.dart';
 import 'package:pocketnews/services/current_user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pocketnews/screens/homeSports.dart';
@@ -12,6 +14,7 @@ import 'package:pocketnews/screens/homeBusiness.dart';
 import 'package:pocketnews/screens/homeHealth.dart';
 import 'package:pocketnews/screens/homeTechnology.dart';
 import 'package:pocketnews/screens/homeEntertainment.dart';
+import 'package:share/share.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key, this.controller, this.fname, this.globalKey}) : super(key: key);
@@ -169,27 +172,38 @@ class _UserPageState extends State<UserPage> {
                             onTap: () async {
                               print("Login Mode: " + loginMode);
 
-                              if (loginMode == "google") {
-                                GoogleSignIn googleSignIn = GoogleSignIn();
-                                await googleSignIn
-                                    .signOut()
-                                    .then((value) => Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => LoginPage()),
-                                        ))
-                                    .catchError((err) => print(err));
-                              } else {
-                                FirebaseAuth.instance
-                                    .signOut()
-                                    .then(
-                                      (result) => Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => LoginPage()),
-                                      ),
-                                    )
-                                    .catchError((err) => print(err));
-                              }
+                   Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Logout()),
+                    );
 //                              navigationBar.onTap(1);
+                            },
+                          ),
+                             ListTile(
+                            leading: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              "Share ",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            trailing: Icon(
+                              Icons.navigate_next,
+                              color: Colors.white,
+                            ),
+                            onTap: () {
+                                  final RenderBox box =
+                                        context.findRenderObject();
+                                    Share.share(
+                                      //U r coustom message
+                                      "Check Out This Amazing News App!    \n https://github.com/vipuluthaiah/News_app_2.0 ",
+                                      subject: "Share This App",
+                                      sharePositionOrigin:
+                                          box.localToGlobal(Offset.zero) &
+                                              box.size,
+                                    );
+                              // send();
                             },
                           ),
                         ],
