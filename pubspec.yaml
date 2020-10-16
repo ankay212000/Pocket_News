@@ -33,6 +33,8 @@ dependencies:
   marquee: ^1.5.2
   auto_size_text: ^2.1.0
   google_sign_in:
+  gradient_widgets: ^0.5.1  
+
   flutter_auth_buttons:
   simple_animations:
 dev_dependencies: 
